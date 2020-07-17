@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './style.scss'
-import Avatar from '../../assets/images/img_avatar.png';
+import Avatar from '../../assets/images/img_avatar.png'
 
 export default class Profile extends Component {
     constructor(props) {
@@ -13,6 +13,7 @@ export default class Profile extends Component {
     onShowPasswordClick = () => {
         this.setState({showPassword: !this.state.showPassword})
     }
+
     render() {
         const showPasswordIcon = this.state.showPassword ? "fa fa-eye show-hide-pwd-icon":"fa fa-eye-slash show-hide-pwd-icon";
         const passwordType = this.state.showPassword ? "password" : "text";
