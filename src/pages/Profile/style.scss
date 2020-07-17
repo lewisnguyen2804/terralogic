@@ -5,13 +5,19 @@ $third-color: #bd10e0;
 .bold-font {
     font-family: 'Proxima Bold';
 }
+
+// HEADER
 .header {
     background-color: $main-color;
     border-radius: 0 0 6px 6px;
     .header-text {
+        padding: {
+            top: 20px;
+            bottom: 10px;
+        }
         h2 {
             color: white;
-            font-family: 'Proxima Bold';
+            @extend .bold-font;
         }
         p {
             color: $second-color;
@@ -20,6 +26,8 @@ $third-color: #bd10e0;
     }
 }
 
+
+// PROFILE PICTURE & NAME
 .name-avatar {
     margin: 40px 0 40px 0;
     display: flex;
@@ -32,15 +40,19 @@ $third-color: #bd10e0;
         margin-right: 24px;
     }
     .user-name {
+        margin-top: 10px;
         @extend .bold-font;
     }
 }
 
+// HR
+.hr-divide {
+    // margin-top: px;
+}
+// INPUTS
 .input-group {
     position: relative;
-    margin: {
-        bottom: 31px;
-    }
+    margin-bottom: 23px;
     > label {
         font-size: 0.9rem;
         position: absolute;
@@ -60,6 +72,7 @@ $third-color: #bd10e0;
     }
 }
 
+// LABEL
 .change-pwd-label {
     color: $second-color;
     margin: {
@@ -68,7 +81,7 @@ $third-color: #bd10e0;
     }
 }
 
-// BUTTON
+// BUTTONS
 .main-button {
     border: none;
     border-radius: 30px;
@@ -99,9 +112,20 @@ $third-color: #bd10e0;
     border: 1px solid $third-color;
 }
 
+// AREA
 .save-logout {
     margin: {
         bottom: 40px;
-        
     }
+}
+
+// ICON PASSWORD
+.show-hide-pwd-icon {
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+    top: 23px;
+    font-size: 1.5rem;
+    color: $third-color;
+    cursor: pointer;
 }
