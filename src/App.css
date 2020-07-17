@@ -1,38 +1,23 @@
-.App {
-  text-align: center;
+html {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: 'Proxima'!important;
+}
+@font-face {
+  font-family: 'Proxima';
+  src: local('Proxima'), url(./fonts/ProximaNova-Regular.otf) format('woff');
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: 'Proxima Bold';
+  src: local('Proxima Bold'), url(./fonts/Proxima\ Nova\ Bold.otf) format('woff');
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+  font-family: 'Proxima Thin';
+  src: local('Proxima Thin'), url(./fonts/Proxima\ Nova\ Thin.otf) format('woff');
 }

@@ -1,0 +1,57 @@
+$main-color: #4d0c5a;
+$second-color: #bfc2d3;
+
+.header {
+    background-color: $main-color;
+    border-radius: 0 0 6px 6px;
+    .header-text {
+        h1 {
+            color: white;
+        }
+        p {
+            color: $second-color;
+        }
+
+    }
+}
+
+.name-avatar {
+    margin: 40px 0 40px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .avatar-pic {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-right: 24px;
+    }
+}
+
+.input-group {
+    position: relative;
+    margin: {
+        bottom: 31px;
+    }
+    > label {
+        font-size: 0.9rem;
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        background-color: white;
+        padding: 0 5px 0 5px;
+    }
+    > input {
+        border: 2px solid #212020a6;
+        padding: 10px;
+        height: 70px;
+        border-radius: 4px;
+        width: 100%;
+        font-weight: bold;
+    }
+}
+
+
+.change-pwd-label {
+    color: $second-color;
+}
