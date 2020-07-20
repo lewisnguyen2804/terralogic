@@ -26,10 +26,20 @@ $third-color: #bd10e0;
     }
 }
 
+.content {
+    margin: 20px 0 20px 0;
+}
+
+// NAV
+.sidebar {
+    margin-bottom: 40px!important;
+    background-color: rgb(218, 218, 218);
+    color: white!important;
+}
 
 // PROFILE PICTURE & NAME
 .name-avatar {
-    margin: 40px 0 40px 0;
+    margin-bottom: 40px;
     display: flex;
     flex-direction: row;
     align-items: center;

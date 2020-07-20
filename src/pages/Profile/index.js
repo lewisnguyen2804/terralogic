@@ -27,77 +27,98 @@ export default class Profile extends Component {
                     </div>
                 </div>
 
-                <div className="container">
-                    <div className="name-avatar">
-                        <img className="user-avatar" src={Avatar} />
-                        <h2 className="user-name">Lewis Nguyen</h2>
-                    </div>
+                <div className="container content">
+                    <div className="row">
+                        {/* SIDEBAR */}
+                        <div className="col-sm-4 col-md-4 col-lg-3">
+                            <ul className="nav flex-column nav-pills sidebar">
+                                <li className="nav-item">
+                                    <a className="nav-link active" href="#">My Profile</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#">Settings</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#">Others</a>
+                                </li>
+                            </ul>
+                        </div>
+                        {/* CONTENT */}
+                        <div className="col-sm-8 col-md-8">
+                            <div className="container">
+                                <div className="name-avatar">
+                                    <img className="user-avatar" src={Avatar} />
+                                    <h2 className="user-name">Lewis Nguyen</h2>
+                                </div>
 
-                    <div className="contact-information">
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div className="input-group">
-                                    <label>Full name</label>
-                                    <input type="text" value="Lewis Nguyen" name="full-name" />
+                                <div className="contact-information">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="input-group">
+                                                <label>Full name</label>
+                                                <input type="text" value="Lewis Nguyen" name="full-name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="row">
+                                        <div className="col-md">
+                                            <div className="input-group">
+                                                <label>Email</label>
+                                                <input type="text" value="lewis.nguyen@terralogic.com" name="email" />
+                                            </div>
+                                        </div>
+                                        <div className="col-md">
+                                            <div className="input-group">
+                                                <label>Phone</label>
+                                                <input type="text" value="8412345678" name="phone" />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        
-                        <div className="row">
-                            <div className="col-md">
-                                <div className="input-group">
-                                    <label>Email</label>
-                                    <input type="text" value="lewis.nguyen@terralogic.com" name="email" />
-                                </div>
-                            </div>
-                            <div className="col-md">
-                                <div className="input-group">
-                                    <label>Phone</label>
-                                    <input type="text" value="8412345678" name="phone" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr className="hr-divide" />
-                    <p className="change-pwd-label">Change password</p>
+                                <hr className="hr-divide" />
+                                <p className="change-pwd-label">Change password</p>
 
-                    <div className="password-change">
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div className="input-group">
-                                    <label>Current password</label>
-                                    <input type={passwordType} name="current-pwd" />
-                                    <i 
-                                        className={showPasswordIcon}
-                                        onClick={this.onShowPasswordClick}></i>
+                                <div className="password-change">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="input-group">
+                                                <label>Current password</label>
+                                                <input type={passwordType} name="current-pwd" />
+                                                <i 
+                                                    className={showPasswordIcon}
+                                                    onClick={this.onShowPasswordClick}></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md">
+                                            <div className="input-group">
+                                                <label>New password</label>
+                                                <input type={passwordType} name="new-pwd" />
+                                                <i 
+                                                    className={showPasswordIcon}
+                                                    onClick={this.onShowPasswordClick}></i>
+                                            </div>
+                                        </div>
+                                        <div className="col-md">
+                                            <div className="input-group">
+                                                <label>Confirm password</label>
+                                                <input type={passwordType} name="confirm-pwd" />
+                                                <i 
+                                                    className={showPasswordIcon}
+                                                    onClick={this.onShowPasswordClick}></i>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md">
-                                <div className="input-group">
-                                    <label>New password</label>
-                                    <input type={passwordType} name="new-pwd" />
-                                    <i 
-                                        className={showPasswordIcon}
-                                        onClick={this.onShowPasswordClick}></i>
-                                </div>
-                            </div>
-                            <div className="col-md">
-                                <div className="input-group">
-                                    <label>Confirm password</label>
-                                    <input type={passwordType} name="confirm-pwd" />
-                                    <i 
-                                        className={showPasswordIcon}
-                                        onClick={this.onShowPasswordClick}></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div className="save-logout">
-                        <input type="button" className="save-button" value="Save" />
-                        <input type="button" className="logout-button" value="Logout" />
+                                <div className="save-logout">
+                                    <input type="button" className="save-button" value="Save" />
+                                    <input type="button" className="logout-button" value="Logout" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
