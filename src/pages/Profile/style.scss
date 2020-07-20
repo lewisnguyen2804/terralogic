@@ -1,6 +1,6 @@
 $main-color: #4d0c5a;
 $second-color: #bfc2d3;
-$third-color: #bd10e0;
+$third-color: #2a9cdd;
 
 .bold-font {
     font-family: 'Proxima Bold';
@@ -8,7 +8,11 @@ $third-color: #bd10e0;
 
 // HEADER
 .header {
-    background-color: $main-color;
+    // background-color: $main-color;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url(../../assets/images/header-image.jpg);
     border-radius: 0 0 6px 6px;
     .header-text {
         padding: {
