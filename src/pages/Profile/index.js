@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import './style.scss'
 import Avatar from '../../assets/images/img_avatar.png'
 
+import PageTitle from '../../components/PageTitle';
+import UserCard from './UserCard';
+import ProfileInput from './ProfileInput';
+import Button from '../../components/Button';
+
 export default class Profile extends Component {
     constructor(props) {
         super(props);
@@ -20,41 +25,24 @@ export default class Profile extends Component {
 
         return (
             <div>
-                <div className="container-fluid header">
-                    <div className="container header-text">
-                        <h2>My Profile</h2>
-                        <p>Manage your profile and contact information.</p>
-                    </div>
-                </div>
+                <PageTitle title="My Profile" description="Manage your profile and contact information." />
 
                 <div className="container">
-                    <div className="name-avatar">
-                        <img className="user-avatar" src={Avatar} />
-                        <h2 className="user-name">Lewis Nguyen</h2>
-                    </div>
+                    <UserCard avatar={Avatar} name="Lewis Nguyen"/>
 
                     <div className="contact-information">
                         <div className="row">
                             <div className="col-md-6">
-                                <div className="input-group">
-                                    <label>Full name</label>
-                                    <input type="text" value="Lewis Nguyen" name="full-name" />
-                                </div>
+                                <ProfileInput inputType="text" inputTitle="Full Name" inputValue="Lewis Nguyen" inputName="fullname" />
                             </div>
                         </div>
                         
                         <div className="row">
                             <div className="col-md">
-                                <div className="input-group">
-                                    <label>Email</label>
-                                    <input type="text" value="lewis.nguyen@terralogic.com" name="email" />
-                                </div>
+                                <ProfileInput inputType="text" inputTitle="Email" inputValue="lewis.nguyen@terralogic.com" inputName="email" />
                             </div>
                             <div className="col-md">
-                                <div className="input-group">
-                                    <label>Phone</label>
-                                    <input type="text" value="8412345678" name="phone" />
-                                </div>
+                                <ProfileInput inputType="text" inputTitle="Phone" inputValue="+8412355458" inputName="phone" />
                             </div>
                         </div>
                     </div>
@@ -96,8 +84,9 @@ export default class Profile extends Component {
                     </div>
 
                     <div className="save-logout">
-                        <input type="button" className="save-button" value="Save" />
-                        <input type="button" className="logout-button" value="Logout" />
+                        <Button buttonType="button" buttonClassName="button-type-1" buttonValue="Save" />
+                        <div className="space" />
+                        <Button buttonType="button" buttonClassName="button-type-2" buttonValue="Logout" />
                     </div>
                 </div>
             </div>

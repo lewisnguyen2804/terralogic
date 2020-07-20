@@ -1,0 +1,63 @@
+@import '../../../style.scss';
+
+.login-form {
+    margin-top: 20px;
+}
+
+.form-title {
+    font-weight: bold;
+}
+
+.input-container {
+    margin-top: 20px;
+}
+
+.input-title {
+    margin-left: 12px;
+    font-weight: bold;
+    color: $gray-color;
+}
+.input-with-icon {
+    position: relative;
+    .input-icon {
+        position: absolute;
+        left: 12px;
+        top: 12px;
+    }
+    .input-text {
+        text-indent: 45px;
+        outline: none;
+        width: 350px;
+        height: 40px;
+        border-radius: 20px;
+        border: 1px solid #dfe2e6;
+        &::placeholder {
+            color: #dfe2e6;
+        }
+    }
+    .show-password-icon {
+        position: absolute;
+        left: 320px;
+        top: 13px;
+        cursor: pointer;
+    }
+}
+
+
+.register-login-buttons {
+    display: flex;
+    margin-top: 30px;
+    input {
+        height: 40px!important;
+        font-size: 1rem!important;
+    }
+}
+
+.remember-login {
+    margin-top: 10px;
+    color: $gray-color;
+    font-weight: bold;
+    input {
+        margin-right: 10px;
+    }
+}

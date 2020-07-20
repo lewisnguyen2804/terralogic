@@ -1,0 +1,14 @@
+@import '../../../style.scss';
+
+.company-logo {
+    height: 70px;
+    margin-top: 30px;
+}
+
+.logo-description {
+    text-transform: uppercase;
+    font-size: 0.6rem;
+    margin-top: 25px;
+    color: $gray-color;
+    font-weight: bold;
+}
