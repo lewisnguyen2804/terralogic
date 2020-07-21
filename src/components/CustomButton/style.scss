@@ -6,10 +6,6 @@
     border: none;
     border-radius: 30px;
     height: 60px;
-    // padding: {
-    //     left: 65px;
-    //     right: 65px;
-    // }
     @extend .bold-font;
     font-size: 1.2rem;
     outline: none;
@@ -22,6 +18,7 @@
     @extend .main-button;
     background-color: $third-color;
     color: white;
+    box-shadow: 0 10px 20px 0 rgba(189, 16, 224, 0.3);
 }
 
 .button-type-2 {

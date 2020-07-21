@@ -131,7 +131,6 @@ export default class LoginForm extends Component {
                 {/* ERROR MESSAGE */}
                 {this.state.isError ?
                     <div className="alert alert-danger alert-dismissible">
-                        <button type="button" className="close" data-dismiss="alert">&times;</button>
                         <strong>{this.state.error}</strong>
                     </div> : <div></div>
                 }
