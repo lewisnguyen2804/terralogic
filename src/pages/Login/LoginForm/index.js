@@ -13,6 +13,7 @@ export default class LoginForm extends Component {
             password: '',
             isError: false,
             errorMsg: '',
+            showPassword: false
         }
     }
 
@@ -38,14 +39,21 @@ export default class LoginForm extends Component {
             this.setState({ error: `"${this.state.email}" is not an email`, isError: true });
         }
         else if (this.state.password.length < 6) {
-            this.setState({ error:  'Password must be at least 6 characters', isError: true });
+            this.setState({ error: 'Password must be at least 6 characters', isError: true });
         }
         else {
             this.setState({ error: '', isError: false });
         }
     }
 
+
+    onShowPasswordClick = () => {
+        this.setState({ showPassword: !this.state.showPassword });
+    }
+
     render() {
+        let showPasswordIconClassName = this.state.showPassword ? "show-password-icon" : "hide-password-icon";
+        let passwordType = this.state.showPassword ? "text" : "password";
         return (
             <div className="login-form">
                 <h2 className="form-title">Login Your Account</h2>
@@ -70,12 +78,13 @@ export default class LoginForm extends Component {
                             <img className="input-icon" src={PasswordIcon} />
                             <input
                                 className="input-text"
-                                type="password"
+                                type={passwordType}
                                 placeholder="Enter your password"
                                 name="password"
                                 onChange={this.handleChange}
                             />
-                            <img className="show-password-icon" src={ShowPasswordIcon} />
+                            <img className={showPasswordIconClassName} onClick={this.onShowPasswordClick} src={ShowPasswordIcon} />
+
                         </div>
                     </div>
 
