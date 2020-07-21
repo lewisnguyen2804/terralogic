@@ -1,8 +1,21 @@
 @import '../../style.scss';
 
 .login-container {
-    margin: {
-        top: 80px
-    }
+    height: 100vh;
+    overflow: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
+.login-picture-container {
+    right: 10px;
+    margin-top: 50px;
+}
+
+.abs {
+    position: absolute;
+    right: 0;
+    top:0;
+    bottom:0;
+    z-index: 1;
+}

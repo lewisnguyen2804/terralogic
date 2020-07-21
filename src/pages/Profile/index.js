@@ -85,7 +85,6 @@ export default class Profile extends Component {
 
                     <div className="save-logout">
                         <Button buttonType="button" buttonClassName="button-type-1" buttonValue="Save" />
-                        <div className="space" />
                         <Button buttonType="button" buttonClassName="button-type-2" buttonValue="Logout" />
                     </div>
                 </div>

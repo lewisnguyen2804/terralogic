@@ -7,14 +7,22 @@ import LoginForm from './LoginForm'
 export default class Login extends Component {
     render() {
         return (
-            <div className="container login-container">
-                <div className="row">
-                    <div className="col-md login-form-container">
-                        <CompanyLogo />
-                        <LoginForm />
+            <div>
+                <div className="container login-container p-5">
+                    <div className="row align-items-center">
+                        <div className="col-md login-form-container">
+                            <CompanyLogo />
+                            <LoginForm />
+                        </div>
+                        <div></div>
                     </div>
-                    <div className="col-md login-picture-container">
-                        <CompanyImage />
+                </div>
+                <div class="container-fluid abs">
+                    <div class="row align-items-center">
+                        <div class="col-md"></div>
+                        <div class="col-md login-picture-container d-none d-lg-block">
+                            <CompanyImage />
+                        </div>
                     </div>
                 </div>
             </div>
