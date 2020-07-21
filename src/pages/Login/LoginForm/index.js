@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-import './style.scss';
-import EmailIcon from '../../../assets/images/Suche.svg';
-import PasswordIcon from '../../../assets/images/Suche02.svg';
-import ShowPasswordIcon from '../../../assets/images/Suche03.svg';
-import Button from '../../../components/Button';
-import RoundedInput from '../../../components/RoundedInput';
+
+import './style.scss'
+
+import EmailIcon from '../../../assets/images/Suche.svg'
+import PasswordIcon from '../../../assets/images/Suche02.svg'
+import ShowPasswordIcon from '../../../assets/images/Suche03.svg'
+
+import CustomButton from '../../../components/CustomButton'
+import RoundedInput from '../../../components/RoundedInput'
+import CustomCheckBox from '../../../components/CustomCheckBox'
 
 export default class LoginForm extends Component {
     constructor(props) {
@@ -14,23 +18,26 @@ export default class LoginForm extends Component {
             password: '',
             isError: false,
             errorMsg: '',
-            showPassword: false
+            showPassword: false,
+            rememberPassword: false
         }
     }
 
+    // HANDLE INPUTS
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
         });
     };
 
-    // validate email
+    // VALIDATE EMAIL
     validate = (email) => {
         const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
 
         return expression.test(String(email).toLowerCase())
     }
 
+    // SUBMIT FORM
     handleSubmit = async (event) => {
         event.preventDefault();
         let errorMsg = '';
@@ -62,10 +69,14 @@ export default class LoginForm extends Component {
         this.setState({ error: errorMsg, isError: isError });
     }
 
-
+    // SHOW/HIDE PASSWORD
     onShowPasswordClick = () => {
-        console.log('click');
         this.setState({ showPassword: !this.state.showPassword });
+    }
+
+    // REMEMBER PASSWORD
+    rememberPasswordOnChange = () => {
+        this.setState({ rememberPassword: !this.state.rememberPassword })
     }
 
     render() {
@@ -79,6 +90,7 @@ export default class LoginForm extends Component {
                         title="Email"
                         icon={EmailIcon}
                         type="text"
+                        value={this.state.email}
                         placeholder="Enter your email"
                         name="email"
                         handleChange={this.handleChange}
@@ -89,6 +101,7 @@ export default class LoginForm extends Component {
                         title="Password"
                         icon={PasswordIcon}
                         type={passwordType}
+                        value={this.state.password}
                         placeholder="Enter your password"
                         name="password"
                         handleChange={this.handleChange}
@@ -98,15 +111,21 @@ export default class LoginForm extends Component {
                     />
 
                     <div className="register-login-buttons">
-                        <Button buttonType="button" buttonClassName="button-type-2" buttonValue="Register" />
-                        <Button buttonType="submit" buttonClassName="button-type-1" buttonValue="Login" />
+                        <CustomButton
+                            type="button"
+                            className="button-type-2"
+                            value="Register" />
+                        <CustomButton
+                            type="submit"
+                            className="button-type-1"
+                            value="Login" />
                     </div>
 
-                    <label className="remember-login-container">
-                        <input type="checkbox" name="remember-pwd" />
-                        Remember password
-                        <span class="checkmark"></span>
-                    </label>
+                    <CustomCheckBox
+                        label="Remember password"
+                        name="remember-pwd"
+                        onChange={this.rememberPasswordOnChange}
+                    />
                 </form>
 
                 {/* ERROR MESSAGE */}

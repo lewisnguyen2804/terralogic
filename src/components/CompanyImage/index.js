@@ -7,7 +7,7 @@ export default class CompanyImage extends Component {
     render() {
         return (
             <div>
-                <img className="company-image" src={CoImage} alt="company-image" />
+                <img className="company-image" src={CoImage} alt="company-img" />
             </div>
         )
     }
