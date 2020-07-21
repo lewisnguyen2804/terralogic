@@ -23,10 +23,11 @@
     position: absolute;
     right: 0;
     margin-right: 30px;
-    top: 23px;
-    font-size: 1.5rem;
+    top: 25px;
     color: $third-color;
     cursor: pointer;
+    height: 20px;
+    filter: invert(42%) sepia(99%) saturate(7489%) hue-rotate(284deg) brightness(94%) contrast(109%);
 }
 
 .save-logout {

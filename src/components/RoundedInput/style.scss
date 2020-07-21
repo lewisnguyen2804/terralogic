@@ -1,0 +1,40 @@
+@import '../../style.scss';
+
+.input-container {
+    margin-top: 20px;
+}
+
+.input-title {
+    margin-left: 12px;
+    font-weight: bold;
+    color: $gray-color;
+}
+.input-with-icon {
+    position: relative;
+    .input-icon {
+        position: absolute;
+        left: 12px;
+        top: 12px;
+    }
+    .input-text {
+        text-indent: 45px;
+        outline: none;
+        width: 100%;
+        height: 40px;
+        border-radius: 20px;
+        border: 1px solid #dfe2e6;
+        &::placeholder {
+            color: #dfe2e6;
+        }
+    }
+    .show-password-icon {
+        position: absolute;
+        right: 12px;
+        top: 13px;
+        cursor: pointer;
+     }
+    .hide-password-icon {
+        @extend .show-password-icon;
+        // change color
+    }
+}

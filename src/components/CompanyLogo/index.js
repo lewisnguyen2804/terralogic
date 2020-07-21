@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Logo from '../../../assets/images/brand-logo.svg'
+import Logo from '../../assets/images/brand-logo.svg'
 import './style.scss'
 
 export default class CompanyLogo extends Component {

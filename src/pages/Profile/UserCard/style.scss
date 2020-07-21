@@ -1,12 +1,12 @@
 @import '../../../style.scss';
 
 // PROFILE PICTURE & NAME
-.name-avatar {
+.name-image {
     margin: 40px 0 40px 0;
     display: flex;
     flex-direction: row;
     align-items: center;
-    .user-avatar {
+    .user-image {
         width: 60px;
         height: 60px;
         border-radius: 50%;

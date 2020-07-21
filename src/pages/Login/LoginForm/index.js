@@ -4,6 +4,7 @@ import EmailIcon from '../../../assets/images/Suche.svg';
 import PasswordIcon from '../../../assets/images/Suche02.svg';
 import ShowPasswordIcon from '../../../assets/images/Suche03.svg';
 import Button from '../../../components/Button';
+import RoundedInput from '../../../components/RoundedInput';
 
 export default class LoginForm extends Component {
     constructor(props) {
@@ -32,22 +33,38 @@ export default class LoginForm extends Component {
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        if (this.state.email === '' || this.state.password === '') {
-            this.setState({ error: 'Please fill the inputs', isError: true });
+        let errorMsg = '';
+        let isError = false;
+        if (this.state.email === '' && this.state.password === '') {
+            errorMsg = 'Please fill the inputs';
+            isError = true;
+        }
+        else if (this.state.email === '' && this.state.password !== '') {
+            errorMsg = 'Please type your email';
+            isError = true;
+        }
+        else if (this.state.email !== '' && this.state.password === '') {
+            errorMsg = 'Please type your password';
+            isError = true;
         }
         else if (!this.validate(this.state.email)) {
-            this.setState({ error: `"${this.state.email}" is not an email`, isError: true });
+            errorMsg = `"${this.state.email}" is not an email`;
+            isError = true;
         }
         else if (this.state.password.length < 6) {
-            this.setState({ error: 'Password must be at least 6 characters', isError: true });
+            errorMsg = 'Password must be at least 6 characters';
+            isError = true;
         }
         else {
-            this.setState({ error: '', isError: false });
+            errorMsg = '';
+            isError = false;
         }
+        this.setState({ error: errorMsg, isError: isError });
     }
 
 
     onShowPasswordClick = () => {
+        console.log('click');
         this.setState({ showPassword: !this.state.showPassword });
     }
 
@@ -58,46 +75,38 @@ export default class LoginForm extends Component {
             <div className="login-form">
                 <h2 className="form-title">Login Your Account</h2>
                 <form className="form-main" onSubmit={this.handleSubmit}>
-                    <div className="input-container">
-                        <p className="input-title">Email</p>
-                        <div className="input-with-icon">
-                            <img className="input-icon" src={EmailIcon} />
-                            <input
-                                className="input-text"
-                                type="text"
-                                placeholder="Enter your email"
-                                name="email"
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                    </div>
+                    <RoundedInput
+                        title="Email"
+                        icon={EmailIcon}
+                        type="text"
+                        placeholder="Enter your email"
+                        name="email"
+                        handleChange={this.handleChange}
+                    />
 
-                    <div className="input-container">
-                        <p className="input-title">Password</p>
-                        <div className="input-with-icon">
-                            <img className="input-icon" src={PasswordIcon} />
-                            <input
-                                className="input-text"
-                                type={passwordType}
-                                placeholder="Enter your password"
-                                name="password"
-                                onChange={this.handleChange}
-                            />
-                            <img className={showPasswordIconClassName} onClick={this.onShowPasswordClick} src={ShowPasswordIcon} />
-
-                        </div>
-                    </div>
+                    <RoundedInput
+                        isPassword="true"
+                        title="Password"
+                        icon={PasswordIcon}
+                        type={passwordType}
+                        placeholder="Enter your password"
+                        name="password"
+                        handleChange={this.handleChange}
+                        showPwdClassName={showPasswordIconClassName}
+                        showPwdOnClick={this.onShowPasswordClick}
+                        showPwdIcon={ShowPasswordIcon}
+                    />
 
                     <div className="register-login-buttons">
                         <Button buttonType="button" buttonClassName="button-type-2" buttonValue="Register" />
                         <Button buttonType="submit" buttonClassName="button-type-1" buttonValue="Login" />
                     </div>
 
-
-                    <div className="remember-login">
+                    <label className="remember-login-container">
                         <input type="checkbox" name="remember-pwd" />
                         Remember password
-                    </div>
+                        <span class="checkmark"></span>
+                    </label>
                 </form>
 
                 {/* ERROR MESSAGE */}

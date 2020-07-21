@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './style.scss'
-import CompanyLogo from './CompanyLogo'
-import CompanyImage from './CompanyImage'
+import CompanyLogo from '../../components/CompanyLogo'
+import CompanyImage from '../../components/CompanyImage'
 import LoginForm from './LoginForm'
 
 export default class Login extends Component {
