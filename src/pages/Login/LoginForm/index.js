@@ -35,7 +35,7 @@ export default class LoginForm extends Component {
             this.setState({ error: 'Please fill the inputs', isError: true });
         }
         else if (!this.validate(this.state.email)) {
-            this.setState({ error: `${this.state.email} is not an email`, isError: true });
+            this.setState({ error: `"${this.state.email}" is not an email`, isError: true });
         }
         else if (this.state.password.length < 6) {
             this.setState({ error:  'Password must be at least 6 characters', isError: true });

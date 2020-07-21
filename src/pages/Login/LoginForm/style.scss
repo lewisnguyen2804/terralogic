@@ -6,7 +6,8 @@
 }
 
 .form-title {
-    font-weight: bold;
+    @extend .bold-font;
+    font-size: 1.8rem;
 }
 
 .form-main {
