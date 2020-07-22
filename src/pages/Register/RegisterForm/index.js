@@ -10,7 +10,8 @@ import CustomButton from '../../../components/CustomButton'
 import RoundedInput from '../../../components/RoundedInput'
 
 import { withRouter } from 'react-router-dom';
-import Register from '..'
+
+import {userService} from '../../../services';
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -65,6 +66,9 @@ class RegisterForm extends Component {
         else {
             errorMsg = '';
             isError = false;
+
+            // START TO REGISTER
+            userService.register(this.state.email, this.state.password, this.state.fullName, this.state.phoneNumber);
         }
         this.setState({ error: errorMsg, isError: isError });
     }

@@ -12,7 +12,12 @@ import CustomCheckBox from '../../../components/CustomCheckBox'
 
 import { Link } from 'react-router-dom';
 
-export default class LoginForm extends Component {
+// import { userService } from '../../../services';
+import { connect } from 'react-redux';
+import { userActions } from '../../../actions';
+
+
+class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -66,6 +71,9 @@ export default class LoginForm extends Component {
         else {
             errorMsg = '';
             isError = false;
+
+            // START TO LOGIN
+            this.props.login(this.state.email, this.state.password);
         }
         this.setState({ error: errorMsg, isError: isError });
     }
@@ -142,3 +150,15 @@ export default class LoginForm extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    const { loggingIn } = state.authentication;
+    return { loggingIn };
+}
+
+const actionCreators = {
+    login: userActions.login
+};
+
+const LoginFormContainer = connect(mapStateToProps, actionCreators)(LoginForm);
+export default LoginFormContainer;

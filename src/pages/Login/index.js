@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './style.scss'
 import CompanyLogo from '../../components/CompanyLogo'
 import CompanyImage from '../../components/CompanyImage'
-import LoginForm from './LoginForm'
+import LoginFormContainer from './LoginForm'
 
 export default class Login extends Component {
     render() {
@@ -16,7 +16,7 @@ export default class Login extends Component {
                                     <div className="col-sm-1 col-md-2"></div>
                                     <div className="col-sm col-md">
                                         <CompanyLogo />
-                                        <LoginForm />
+                                        <LoginFormContainer />
                                     </div>
                                     <div className="col-sm-1 col-md-2">
                                         {/* Empty col */}
