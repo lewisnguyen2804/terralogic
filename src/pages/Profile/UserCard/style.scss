@@ -6,11 +6,22 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    .user-image {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        margin-right: 24px;
+    .user-image-change {
+        position: relative;
+        .user-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 24px;
+        }
+        .user-image-change-icon {
+            position: absolute;
+            top: 0;
+            margin-left: 35px;
+            margin-top: -17px;
+            left: 0;
+            cursor: pointer;
+        }
     }
     .user-name {
         margin-top: 10px;

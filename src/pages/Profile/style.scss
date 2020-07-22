@@ -10,10 +10,16 @@
     }
 }
 
+// HR
+hr {
+    margin: 0!important;
+}
+
 // AREA
 .save-logout {
     display: flex;
     margin: {
+        top: 17px;
         bottom: 40px;
     }
 }
