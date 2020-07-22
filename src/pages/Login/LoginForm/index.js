@@ -10,6 +10,8 @@ import CustomButton from '../../../components/CustomButton'
 import RoundedInput from '../../../components/RoundedInput'
 import CustomCheckBox from '../../../components/CustomCheckBox'
 
+import { Link } from 'react-router-dom';
+
 export default class LoginForm extends Component {
     constructor(props) {
         super(props);
@@ -91,7 +93,7 @@ export default class LoginForm extends Component {
                         <strong>{this.state.error}</strong>
                     </div> : <div></div>
                 }
-                
+
                 <form className="form-main" onSubmit={this.handleSubmit}>
                     <RoundedInput
                         title="Email"
@@ -118,10 +120,12 @@ export default class LoginForm extends Component {
                     />
 
                     <div className="register-login-buttons">
-                        <CustomButton
-                            type="button"
-                            className="button-type-2"
-                            value="Register" />
+                        <Link to="/register">
+                            <CustomButton
+                                type="button"
+                                className="button-type-2"
+                                value="Register" />
+                        </Link>
                         <CustomButton
                             type="submit"
                             className="button-type-1"

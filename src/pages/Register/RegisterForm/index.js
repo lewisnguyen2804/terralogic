@@ -9,7 +9,10 @@ import ShowPasswordIcon from '../../../assets/images/Suche03.svg'
 import CustomButton from '../../../components/CustomButton'
 import RoundedInput from '../../../components/RoundedInput'
 
-export default class RegisterForm extends Component {
+import { withRouter } from 'react-router-dom';
+import Register from '..'
+
+class RegisterForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -78,6 +81,11 @@ export default class RegisterForm extends Component {
     // REMEMBER PASSWORD
     rememberPasswordOnChange = () => {
         this.setState({ rememberPassword: !this.state.rememberPassword })
+    }
+
+    // GO BACK BUTTON
+    goBack = () => {
+        this.props.history.goBack()
     }
 
     render() {
@@ -157,6 +165,7 @@ export default class RegisterForm extends Component {
                         <CustomButton
                             type="button"
                             className="button-type-2"
+                            onClick={this.goBack}
                             value="Back" />
                         <CustomButton
                             type="submit"
@@ -168,3 +177,5 @@ export default class RegisterForm extends Component {
         )
     }
 }
+
+export default withRouter(RegisterForm);
