@@ -12,13 +12,15 @@ export default class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showPassword: false,
             fullName: 'Lewis Nguyen',
             email: 'lewisnguyen@terralogic.com',
             phone: '+8412323513',
             currentPwd: '123456',
             newPwd: '12345678',
-            confirmPwd: '12345678'
+            confirmPwd: '12345678',
+            showCurrentPwd: false,
+            showNewPwd: false,
+            showConfirmPwd: false
         }
     }
 
@@ -30,12 +32,23 @@ export default class Profile extends Component {
     };
 
     // SHOW/HIDE PASSWORD
-    onShowPasswordClick = () => {
-        this.setState({ showPassword: !this.state.showPassword })
+    onShowCurrentPasswordClick = () => {
+        this.setState({ showCurrentPwd: !this.state.showCurrentPwd })
+    }
+
+    onShowNewPasswordClick = () => {
+        this.setState({ showNewPwd: !this.state.showNewPwd })
+    }
+
+    onShowConfirmPasswordClick = () => {
+        this.setState({ showConfirmPwd: !this.state.showConfirmPwd })
     }
 
     render() {
-        const passwordType = this.state.showPassword ? "text" : "password";
+        const currentPasswordType = this.state.showCurrentPwd ? "text" : "password";
+        const newPasswordType = this.state.showNewPwd ? "text" : "password";
+        const confirmPasswordType = this.state.showConfirmPwd ? "text" : "password";
+
         return (
             <div>
                 <PageTitle
@@ -89,14 +102,14 @@ export default class Profile extends Component {
                             <div className="col-md-6">
                                 <SquaredInput
                                     isPassword="true"
-                                    type={passwordType}
+                                    type={currentPasswordType}
                                     title="Current password"
                                     name="currentPwd"
                                     value={this.state.currentPwd}
                                     imgSrc={ShowPasswordIcon}
                                     imgAlt="pwd-icon"
                                     imgClassName="show-hide-pwd-icon"
-                                    onShowPasswordClick={this.onShowPasswordClick}
+                                    onShowPasswordClick={this.onShowCurrentPasswordClick}
                                     handleChange={this.handleChange}
                                 />
                             </div>
@@ -106,28 +119,28 @@ export default class Profile extends Component {
                             <div className="col-md">
                                 <SquaredInput
                                     isPassword="true"
-                                    type={passwordType}
+                                    type={newPasswordType}
                                     title="New password"
                                     name="newPwd"
                                     value={this.state.newPwd}
                                     imgSrc={ShowPasswordIcon}
                                     imgAlt="pwd-icon"
                                     imgClassName="show-hide-pwd-icon"
-                                    onShowPasswordClick={this.onShowPasswordClick}
+                                    onShowPasswordClick={this.onShowNewPasswordClick}
                                     handleChange={this.handleChange}
                                 />
                             </div>
                             <div className="col-md">
                                 <SquaredInput
                                     isPassword="true"
-                                    type={passwordType}
+                                    type={confirmPasswordType}
                                     title="Confirm password"
                                     name="confirmPwd"
                                     value={this.state.confirmPwd}
                                     imgSrc={ShowPasswordIcon}
                                     imgAlt="pwd-icon"
                                     imgClassName="show-hide-pwd-icon"
-                                    onShowPasswordClick={this.onShowPasswordClick}
+                                    onShowPasswordClick={this.onShowConfirmPasswordClick}
                                     handleChange={this.handleChange}
                                 />
                             </div>

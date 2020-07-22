@@ -7,6 +7,7 @@ html {
 body {
   font-family: 'Proxima'!important;
 }
+
 @font-face {
   font-family: 'Proxima';
   src: local('Proxima'), url(./fonts/ProximaNova-Regular.otf) format('woff');
