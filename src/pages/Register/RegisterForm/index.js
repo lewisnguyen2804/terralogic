@@ -46,16 +46,8 @@ class RegisterForm extends Component {
         event.preventDefault();
         let errorMsg = '';
         let isError = false;
-        if (this.state.email === '' && this.state.password === '') {
-            errorMsg = 'Please type your email and password to login';
-            isError = true;
-        }
-        else if (this.state.email === '' && this.state.password !== '') {
-            errorMsg = 'Please type your email';
-            isError = true;
-        }
-        else if (this.state.email !== '' && this.state.password === '') {
-            errorMsg = 'Please type your password';
+        if (this.state.email === '' || this.state.password === '' || this.state.fullName === '' || this.state.phoneNumber === '') {
+            errorMsg = 'Please fill your information to register';
             isError = true;
         }
         else if (!this.validate(this.state.email)) {
@@ -64,6 +56,10 @@ class RegisterForm extends Component {
         }
         else if (this.state.password.length < 6) {
             errorMsg = 'Password must be at least 6 characters';
+            isError = true;
+        }
+        else if (this.state.confirmPassword !== this.state.password) {
+            errorMsg = 'Passwords are not match';
             isError = true;
         }
         else {
