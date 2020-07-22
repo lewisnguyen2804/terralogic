@@ -1,0 +1,13 @@
+@import '../../style.scss';
+
+.login-page-container {
+    margin: 0 auto;
+    width: 730px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .left-part {
+        padding-right: 50px;
+    }
+}

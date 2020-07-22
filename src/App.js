@@ -7,6 +7,7 @@ import {
 	Switch,
 	Route
 } from "react-router-dom";
+import LoginNoRWD from './pages/LoginNoRWD';
 
 function App() {
 	return (
@@ -15,6 +16,9 @@ function App() {
 				<Switch>
 					<Route path="/login">
 						<Login />
+					</Route>
+					<Route path="/login-no-rwd">
+						<LoginNoRWD />
 					</Route>
 					<Route path="/profile">
 						<Profile />
