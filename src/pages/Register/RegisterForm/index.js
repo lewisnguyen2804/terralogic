@@ -24,7 +24,7 @@ class RegisterForm extends Component {
             isError: false,
             errorMsg: '',
             showPassword: false,
-            rememberPassword: false
+            showConfirmPassword: false,
         }
     }
 
@@ -71,12 +71,11 @@ class RegisterForm extends Component {
 
     // SHOW/HIDE PASSWORD
     onShowPasswordClick = () => {
-        this.setState({ showPassword: !this.state.showPassword });
+        this.setState({ showPassword: !this.state.showPassword })
     }
 
-    // REMEMBER PASSWORD
-    rememberPasswordOnChange = () => {
-        this.setState({ rememberPassword: !this.state.rememberPassword })
+    onShowConfirmPasswordClick = () => {
+        this.setState({ showConfirmPassword: !this.state.showConfirmPassword })
     }
 
     // GO BACK BUTTON
@@ -87,6 +86,10 @@ class RegisterForm extends Component {
     render() {
         let showPasswordIconClassName = this.state.showPassword ? "show-password-icon" : "hide-password-icon";
         let passwordType = this.state.showPassword ? "text" : "password";
+
+        let showConfirmPasswordIconClassName = this.state.showConfirmPassword ? "show-password-icon" : "hide-password-icon";
+        let confirmPasswordType = this.state.showConfirmPassword ? "text" : "password";
+
         return (
             <div className="login-form">
                 <h2 className="form-title">Register Your Account</h2>
@@ -127,13 +130,13 @@ class RegisterForm extends Component {
                         isPassword="true"
                         title="Confirm Password"
                         icon={PasswordIcon}
-                        type={passwordType}
+                        type={confirmPasswordType}
                         value={this.state.confirmPassword}
                         placeholder="Enter your password"
                         name="confirmPassword"
                         handleChange={this.handleChange}
-                        showPwdClassName={showPasswordIconClassName}
-                        showPwdOnClick={this.onShowPasswordClick}
+                        showPwdClassName={showConfirmPasswordIconClassName}
+                        showPwdOnClick={this.onShowConfirmPasswordClick}
                         showPwdIcon={ShowPasswordIcon}
                     />
 
