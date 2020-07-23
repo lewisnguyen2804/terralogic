@@ -3,7 +3,7 @@ import { userService } from '../services';
 // import { alertActions } from './';
 import { history } from '../helpers';
 
-let login = (email, password) => {
+let login = (userLogin) => {
     let request = (user) => {
         return {
             type: userConstants.LOGIN_REQUEST,
@@ -23,8 +23,8 @@ let login = (email, password) => {
         }
     }
     return dispatch => {
-        dispatch(request({ email, password }));
-        userService.login(email, password)
+        dispatch(request(userLogin));
+        userService.login(userLogin)
             .then(
                 user => {
                     if (user.status === 0) {
@@ -32,7 +32,7 @@ let login = (email, password) => {
                     }
                     else if (user.status === 1) {
                         dispatch(success(user));
-                        history.push('/profile');
+                        history.push('/');
                     }
                 }
             );

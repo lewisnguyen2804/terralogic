@@ -1,5 +1,6 @@
 /*eslint-disable */
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux';
 
 import './style.scss'
 
@@ -13,17 +14,17 @@ import CustomCheckBox from '../../../components/CustomCheckBox'
 
 import { Link } from 'react-router-dom';
 
-// import { userService } from '../../../services';
 import { connect } from 'react-redux';
 import { userActions } from '../../../actions';
-
 
 class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            password: '',
+            user: {
+                email: '',
+                password: ''
+            },
             isError: false,
             errorMsg: '',
             showPassword: false,
@@ -33,8 +34,14 @@ class LoginForm extends Component {
 
     // HANDLE INPUTS
     handleChange = (event) => {
+        const { name, value } = event.target;
+        const { user } = this.state;
+
         this.setState({
-            [event.target.name]: event.target.value,
+            user: {
+                ...user,
+                [name]: value
+            }
         });
     };
 
@@ -49,32 +56,32 @@ class LoginForm extends Component {
         event.preventDefault();
         let errorMsg = '';
         let isError = false;
-        if (this.state.email === '' && this.state.password === '') {
+        if (this.state.user.email === '' && this.state.user.password === '') {
             errorMsg = 'Please type your email and password to login';
             isError = true;
         }
-        else if (this.state.email === '' && this.state.password !== '') {
+        else if (this.state.user.email === '' && this.state.user.password !== '') {
             errorMsg = 'Please type your email';
             isError = true;
         }
-        else if (this.state.email !== '' && this.state.password === '') {
+        else if (this.state.user.email !== '' && this.state.user.password === '') {
             errorMsg = 'Please type your password';
             isError = true;
         }
-        else if (!this.validate(this.state.email)) {
+        else if (!this.validate(this.state.user.email)) {
             errorMsg = `"${this.state.email}" is not an email`;
             isError = true;
         }
-        else if (this.state.password.length < 6) {
-            errorMsg = 'Password must be at least 6 characters';
-            isError = true;
-        }
+        // else if (this.state.user.password.length < 6) {
+        //     errorMsg = 'Password must be at least 6 characters';
+        //     isError = true;
+        // }
         else {
             errorMsg = '';
             isError = false;
 
             // START TO LOGIN
-            this.props.login(this.state.email, this.state.password);
+            this.props.login(this.state.user);
         }
         this.setState({ error: errorMsg, isError: isError });
     }
@@ -108,7 +115,7 @@ class LoginForm extends Component {
                         title="Email"
                         icon={EmailIcon}
                         type="text"
-                        value={this.state.email}
+                        value={this.state.user.email}
                         placeholder="Enter your email"
                         name="email"
                         handleChange={this.handleChange}
@@ -119,7 +126,7 @@ class LoginForm extends Component {
                         title="Password"
                         icon={PasswordIcon}
                         type={passwordType}
-                        value={this.state.password}
+                        value={this.state.user.password}
                         placeholder="Enter your password"
                         name="password"
                         handleChange={this.handleChange}
@@ -153,13 +160,14 @@ class LoginForm extends Component {
 }
 
 function mapStateToProps(state) {
-    const { loggingIn } = state.authentication;
-    return { loggingIn };
+    return {}
 }
 
-const actionCreators = {
-    login: userActions.login
-};
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        login: userActions.login
+    }, dispatch)
+}
 
-const LoginFormContainer = connect(mapStateToProps, actionCreators)(LoginForm);
+const LoginFormContainer = connect(mapStateToProps, mapDispatchToProps)(LoginForm);
 export default LoginFormContainer;

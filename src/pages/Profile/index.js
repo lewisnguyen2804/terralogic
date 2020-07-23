@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux';
+
 import './style.scss'
 import Avatar from '../../assets/images/img_avatar.png'
 import ShowPasswordIcon from '../../assets/images/Suche03.svg';
@@ -176,11 +178,12 @@ class Profile extends Component {
 function mapStateToProps(state) {
     return {}
 }
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        logout: userActions.logout
+    }, dispatch)
+}
 
-const actionCreators = {
-    logout: userActions.logout
-};
-
-const ProfileContainer = connect(mapStateToProps, actionCreators)(Profile);
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 export default ProfileContainer;

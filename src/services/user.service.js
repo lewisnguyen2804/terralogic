@@ -1,14 +1,13 @@
 import apiUrl from './config';
 
-
 // LOGIN
-let login = async (email, password) => {
+let login = async (user) => {
     var options = {
         'method': 'POST',
         'headers': {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify(user)
     };
 
     try {

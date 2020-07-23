@@ -25,12 +25,6 @@ function App() {
 					<Route path="/register">
 						<Register />
 					</Route>
-					<Route path="/profile">
-						<ProfileContainer />
-					</Route>
-					{/* <Route path="/">
-						<Login />
-					</Route> */}
 				</Switch>
 			</div>
 		</Router>

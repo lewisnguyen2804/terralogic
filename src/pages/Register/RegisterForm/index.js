@@ -1,5 +1,6 @@
 /*eslint-disable */
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux';
 
 import './style.scss'
 
@@ -63,7 +64,7 @@ class RegisterForm extends Component {
         event.preventDefault();
         let errorMsg = '';
         let isError = false;
-        if (this.state.user.email === '' || this.state.user.password === '' || this.state.user.fullName === '' || this.state.user.phoneNumber === '') {
+        if (this.state.user.email === '' || this.state.user.password === '' || this.state.user.name === '' || this.state.user.phone === '') {
             errorMsg = 'Please fill your information to register';
             isError = true;
         }
@@ -71,10 +72,10 @@ class RegisterForm extends Component {
             errorMsg = `"${this.state.user.email}" is not an email`;
             isError = true;
         }
-        else if (this.state.user.password.length < 6) {
-            errorMsg = 'Password must be at least 6 characters';
-            isError = true;
-        }
+        // else if (this.state.user.password.length < 6) {
+        //     errorMsg = 'Password must be at least 6 characters';
+        //     isError = true;
+        // }
         else if (this.state.confirmPassword !== this.state.user.password) {
             errorMsg = 'Passwords are not match';
             isError = true;
@@ -201,10 +202,13 @@ function mapStateToProps(state) {
     return {}
 }
 
-const actionCreators = {
-    register: userActions.register
-};
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        register: userActions.register
+    }, dispatch)
+}
 
-const RegisterFormContainer = connect(mapStateToProps, actionCreators)(RegisterForm);
+
+const RegisterFormContainer = connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
 
 export default withRouter(RegisterFormContainer);
