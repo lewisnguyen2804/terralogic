@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { Component } from 'react'
 
 import './style.scss'
@@ -67,7 +68,7 @@ class RegisterForm extends Component {
             isError = true;
         }
         else if (!this.validate(this.state.user.email)) {
-            errorMsg = `"${this.state.email}" is not an email`;
+            errorMsg = `"${this.state.user.email}" is not an email`;
             isError = true;
         }
         else if (this.state.user.password.length < 6) {

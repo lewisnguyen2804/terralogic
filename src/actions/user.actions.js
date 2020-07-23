@@ -3,60 +3,86 @@ import { userService } from '../services';
 // import { alertActions } from './';
 import { history } from '../helpers';
 
-export const userActions = {
-    login,
-    register,
-    logout
-};
-
-function login(email, password) {
+let login = (email, password) => {
+    let request = (user) => {
+        return {
+            type: userConstants.LOGIN_REQUEST,
+            user
+        }
+    }
+    let success = (user) => {
+        return {
+            type: userConstants.LOGIN_SUCCESS,
+            user
+        }
+    }
+    let failure = (user) => {
+        return {
+            type: userConstants.LOGIN_FAILURE,
+            user
+        }
+    }
     return dispatch => {
         dispatch(request({ email, password }));
-
         userService.login(email, password)
             .then(
                 user => {
                     if (user.status === 0) {
                         dispatch(failure(user));
                     }
-                    else {
+                    else if (user.status === 1) {
                         dispatch(success(user));
                         history.push('/profile');
                     }
                 }
             );
     };
-
-    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-    function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-    function failure(user) { return { type: userConstants.LOGIN_FAILURE, user } }
 }
 
-function logout() {
+let logout = () => {
     userService.logout();
     history.push('/');
     return { type: userConstants.LOGOUT };
 }
 
-function register(userRegister) {
+let register = (userRegister) => {
+    let request = (user) => {
+        return {
+            type: userConstants.REGISTER_REQUEST,
+            user
+        }
+    }
+    let success = (user) => {
+        return {
+            type: userConstants.REGISTER_SUCCESS,
+            user
+        }
+    }
+    let failure = (user) => {
+        return {
+            type: userConstants.REGISTER_FAILURE,
+            user
+        }
+    }
     return dispatch => {
         dispatch(request(userRegister));
-
         userService.register(userRegister)
             .then(
                 user => {
                     if (user.status === 0) {
                         dispatch(failure(user));
                     }
-                    else {
+                    else if (user.status === 1) {
                         dispatch(success(user));
                         history.push('/login');
                     }
                 }
             );
     };
-
-    function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
-    function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
-    function failure(user) { return { type: userConstants.REGISTER_FAILURE, user } }
 }
+
+export const userActions = {
+    login,
+    register,
+    logout
+};
