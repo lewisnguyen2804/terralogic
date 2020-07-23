@@ -5,7 +5,8 @@ import { history } from '../helpers';
 
 export const userActions = {
     login,
-    register
+    register,
+    logout
 };
 
 function login(email, password) {
@@ -15,7 +16,7 @@ function login(email, password) {
         userService.login(email, password)
             .then(
                 user => {
-                    if (user == null) {
+                    if (user.status === 0) {
                         dispatch(failure(user));
                     }
                     else {
@@ -31,6 +32,12 @@ function login(email, password) {
     function failure(user) { return { type: userConstants.LOGIN_FAILURE, user } }
 }
 
+function logout() {
+    userService.logout();
+    history.push('/');
+    return { type: userConstants.LOGOUT };
+}
+
 function register(userRegister) {
     return dispatch => {
         dispatch(request(userRegister));
@@ -38,9 +45,10 @@ function register(userRegister) {
         userService.register(userRegister)
             .then(
                 user => {
-                    if (user == null) {
+                    if (user.status === 0) {
                         dispatch(failure(user));
-                    } else {
+                    }
+                    else {
                         dispatch(success(user));
                         history.push('/login');
                     }

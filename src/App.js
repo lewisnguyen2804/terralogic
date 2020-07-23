@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 
-import Profile from './pages/Profile';
 import Login from './pages/Login';
 import {
 	Router,
@@ -9,14 +8,17 @@ import {
 	Route
 } from "react-router-dom";
 import Register from './pages/Register';
+import PrivateRoute from './components/PrivateRoute';
 
 import { history } from './helpers';
+import ProfileContainer from './pages/Profile';
 
 function App() {
 	return (
 		<Router history={history}>
 			<div>
 				<Switch>
+					<PrivateRoute exact path="/" component={ProfileContainer} />
 					<Route path="/login">
 						<Login />
 					</Route>
@@ -24,11 +26,11 @@ function App() {
 						<Register />
 					</Route>
 					<Route path="/profile">
-						<Profile />
+						<ProfileContainer />
 					</Route>
-					<Route path="/">
+					{/* <Route path="/">
 						<Login />
-					</Route>
+					</Route> */}
 				</Switch>
 			</div>
 		</Router>

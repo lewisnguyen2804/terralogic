@@ -1,12 +1,8 @@
 import apiUrl from './config';
 
-export const userService = {
-    login,
-    register
-};
 
 // LOGIN
-async function login(email, password) {
+let login = async (email, password) => {
     var options = {
         'method': 'POST',
         'headers': {
@@ -18,16 +14,9 @@ async function login(email, password) {
     try {
         let fetchResponse = await fetch(`${apiUrl}/login`, options);
         let data = await fetchResponse.json();
-
-        console.log(data);
-
-        if (data.status === 1) {
-            localStorage.setItem('user', data);
-            return data;
-        } else if (data.status === 0) {
-            return null;
-        }
-
+        console.log(data); //
+        localStorage.setItem('user', data);
+        return data;
     } catch (e) {
         // SOMETHING WRONG WITH LOGIN
         console.log("error: " + e);
@@ -35,13 +24,13 @@ async function login(email, password) {
 }
 
 // LOGOUT
-function logout() {
+let logout = () => {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
 }
 
 // REGISTER
-async function register(user) {
+let register = async (user) => {
     var options = {
         'method': 'POST',
         'headers': {
@@ -51,19 +40,18 @@ async function register(user) {
     };
 
     try {
-        let fetchResponse = await fetch(`${apiUrl}/regiser`, options);
+        let fetchResponse = await fetch(`${apiUrl}/register`, options);
         let data = await fetchResponse.json();
-
-        console.log(data);
-
-        if (data.status === 1) {
-            return data;
-        } else if (data.status === 0) {
-            return null;
-        }
-
+        console.log(data); //
+        return data;
     } catch (e) {
         // SOMETHING WRONG WITH REGISTER
         console.log("error: " + e);
     }
 }
+
+export const userService = {
+    login,
+    register,
+    logout
+};

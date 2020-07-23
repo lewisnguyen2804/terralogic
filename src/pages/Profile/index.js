@@ -8,7 +8,10 @@ import UserCard from './UserCard';
 import SquaredInput from '../../components/SquaredInput';
 import CustomButton from '../../components/CustomButton';
 
-export default class Profile extends Component {
+import { connect } from 'react-redux';
+import { userActions } from '../../actions';
+
+class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -44,6 +47,11 @@ export default class Profile extends Component {
         this.setState({ showConfirmPwd: !this.state.showConfirmPwd })
     }
 
+    // LOGOUT
+    onLogOutClick = () => {
+        this.props.logout();
+    }
+    
     render() {
         const currentPasswordType = this.state.showCurrentPwd ? "text" : "password";
         const newPasswordType = this.state.showNewPwd ? "text" : "password";
@@ -155,6 +163,7 @@ export default class Profile extends Component {
                         <CustomButton
                             type="button"
                             className="button-type-2"
+                            onClick={this.onLogOutClick}
                             value="Logout" />
                     </div>
                 </div>
@@ -162,3 +171,16 @@ export default class Profile extends Component {
         )
     }
 }
+
+
+function mapStateToProps(state) {
+    return {}
+}
+
+const actionCreators = {
+    logout: userActions.logout
+};
+
+const ProfileContainer = connect(mapStateToProps, actionCreators)(Profile);
+
+export default ProfileContainer;
