@@ -8,43 +8,62 @@ export const userService = {
 // LOGIN
 async function login(email, password) {
     var options = {
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        };
+        'method': 'POST',
+        'headers': {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+    };
 
     try {
-        const fetchResponse = await fetch(`${apiUrl}/login`, options);
-        const data = await fetchResponse.json();
+        let fetchResponse = await fetch(`${apiUrl}/login`, options);
+        let data = await fetchResponse.json();
 
-        // LOGIN SUCCESSED
-        // console.log("data: " + JSON.stringify(data));
+        console.log(data);
+
+        if (data.status === 1) {
+            localStorage.setItem('user', data);
+            return data;
+        } else if (data.status === 0) {
+            return null;
+        }
+
     } catch (e) {
         // SOMETHING WRONG WITH LOGIN
         console.log("error: " + e);
-    }   
+    }
+}
+
+// LOGOUT
+function logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('user');
 }
 
 // REGISTER
-async function register (email, password, name, phone) {
+async function register(user) {
     var options = {
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password, name, phone })
-        };
+        'method': 'POST',
+        'headers': {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    };
 
     try {
-        const fetchResponse = await fetch(`${apiUrl}/register`, options);
-        const data = await fetchResponse.json();
+        let fetchResponse = await fetch(`${apiUrl}/regiser`, options);
+        let data = await fetchResponse.json();
 
-        // REGISTER SUCCESSED
-        // console.log("data: " + JSON.stringify(data));
+        console.log(data);
+
+        if (data.status === 1) {
+            return data;
+        } else if (data.status === 0) {
+            return null;
+        }
+
     } catch (e) {
         // SOMETHING WRONG WITH REGISTER
         console.log("error: " + e);
-    }   
+    }
 }

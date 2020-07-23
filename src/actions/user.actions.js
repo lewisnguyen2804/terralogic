@@ -10,42 +10,45 @@ export const userActions = {
 
 function login(email, password) {
     return dispatch => {
-        dispatch(request({ email }));
+        dispatch(request({ email, password }));
 
         userService.login(email, password)
             .then(
                 user => {
-                    dispatch(success(user));
-                    history.push('/profile');
-                },
-                error => {
-                    dispatch(failure(error));
+                    if (user == null) {
+                        dispatch(failure(user));
+                    }
+                    else {
+                        dispatch(success(user));
+                        history.push('/profile');
+                    }
                 }
             );
     };
 
     function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
+    function failure(user) { return { type: userConstants.LOGIN_FAILURE, user } }
 }
 
-function register(user) {
+function register(userRegister) {
     return dispatch => {
-        dispatch(request(user));
+        dispatch(request(userRegister));
 
-        userService.register(user)
+        userService.register(userRegister)
             .then(
                 user => {
-                    dispatch(success(user));
-                    history.push('/login');
-                },
-                error => {
-                    dispatch(failure(error));
+                    if (user == null) {
+                        dispatch(failure(user));
+                    } else {
+                        dispatch(success(user));
+                        history.push('/login');
+                    }
                 }
             );
     };
 
     function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
     function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+    function failure(user) { return { type: userConstants.REGISTER_FAILURE, user } }
 }

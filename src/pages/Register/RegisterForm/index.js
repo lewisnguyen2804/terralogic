@@ -11,17 +11,20 @@ import RoundedInput from '../../../components/RoundedInput'
 
 import { withRouter } from 'react-router-dom';
 
-import {userService} from '../../../services';
+import { connect } from 'react-redux';
+import { userActions } from '../../../actions';
 
 class RegisterForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            password: '',
+            user: {
+                email: '',
+                password: '',
+                name: '',
+                phone: '',
+            },
             confirmPassword: '',
-            fullName: '',
-            phoneNumber: '',
             isError: false,
             errorMsg: '',
             showPassword: false,
@@ -31,9 +34,21 @@ class RegisterForm extends Component {
 
     // HANDLE INPUTS
     handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value,
-        });
+        const { name, value } = event.target;
+        const { user } = this.state;
+        if (name === 'confirmPassword') {
+            this.setState({
+                [name]: value,
+            });
+        }
+        else {
+            this.setState({
+                user: {
+                    ...user,
+                    [name]: value
+                }
+            });
+        }
     };
 
     // VALIDATE EMAIL
@@ -47,19 +62,19 @@ class RegisterForm extends Component {
         event.preventDefault();
         let errorMsg = '';
         let isError = false;
-        if (this.state.email === '' || this.state.password === '' || this.state.fullName === '' || this.state.phoneNumber === '') {
+        if (this.state.user.email === '' || this.state.user.password === '' || this.state.user.fullName === '' || this.state.user.phoneNumber === '') {
             errorMsg = 'Please fill your information to register';
             isError = true;
         }
-        else if (!this.validate(this.state.email)) {
+        else if (!this.validate(this.state.user.email)) {
             errorMsg = `"${this.state.email}" is not an email`;
             isError = true;
         }
-        else if (this.state.password.length < 6) {
+        else if (this.state.user.password.length < 6) {
             errorMsg = 'Password must be at least 6 characters';
             isError = true;
         }
-        else if (this.state.confirmPassword !== this.state.password) {
+        else if (this.state.confirmPassword !== this.state.user.password) {
             errorMsg = 'Passwords are not match';
             isError = true;
         }
@@ -68,7 +83,7 @@ class RegisterForm extends Component {
             isError = false;
 
             // START TO REGISTER
-            userService.register(this.state.email, this.state.password, this.state.fullName, this.state.phoneNumber);
+            this.props.register(this.state.user);
         }
         this.setState({ error: errorMsg, isError: isError });
     }
@@ -110,7 +125,7 @@ class RegisterForm extends Component {
                         title="Email"
                         icon={EmailIcon}
                         type="text"
-                        value={this.state.email}
+                        value={this.state.user.email}
                         placeholder="Enter your email"
                         name="email"
                         handleChange={this.handleChange}
@@ -121,7 +136,7 @@ class RegisterForm extends Component {
                         title="Password"
                         icon={PasswordIcon}
                         type={passwordType}
-                        value={this.state.password}
+                        value={this.state.user.password}
                         placeholder="Enter your password"
                         name="password"
                         handleChange={this.handleChange}
@@ -148,9 +163,9 @@ class RegisterForm extends Component {
                         title="Full Name"
                         icon={EmailIcon}
                         type="text"
-                        value={this.state.fullName}
+                        value={this.state.user.name}
                         placeholder="Enter your full name"
-                        name="fullName"
+                        name="name"
                         handleChange={this.handleChange}
                     />
 
@@ -158,9 +173,9 @@ class RegisterForm extends Component {
                         title="Phone Number"
                         icon={EmailIcon}
                         type="text"
-                        value={this.state.phoneNumber}
+                        value={this.state.user.phone}
                         placeholder="Enter your phone number"
-                        name="phoneNumber"
+                        name="phone"
                         handleChange={this.handleChange}
                     />
 
@@ -181,4 +196,14 @@ class RegisterForm extends Component {
     }
 }
 
-export default withRouter(RegisterForm);
+function mapStateToProps(state) {
+    return {}
+}
+
+const actionCreators = {
+    register: userActions.register
+};
+
+const RegisterFormContainer = connect(mapStateToProps, actionCreators)(RegisterForm);
+
+export default withRouter(RegisterFormContainer);
