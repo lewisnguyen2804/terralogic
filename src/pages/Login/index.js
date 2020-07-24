@@ -10,7 +10,7 @@ export default class Login extends Component {
             <div>
                 <div className="container-fluid p-lg-5">
                     <div className="row">
-                        <div className="col-sm-12 col-lg">
+                        <div className="col-lg">
                             <div className="row">
                                 <div className="col-sm-1 col-md-2"></div>
                                 <div className="col-sm col-md">
@@ -22,7 +22,7 @@ export default class Login extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-sm-0 col-lg d-none d-lg-block align-self-center">
+                        <div className="col-lg d-none d-lg-block align-self-center">
                             <CompanyImage />
                         </div>
                     </div>
