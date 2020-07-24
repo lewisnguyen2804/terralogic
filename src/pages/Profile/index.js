@@ -44,7 +44,7 @@ export default class Profile extends Component {
                 <div className="container content">
                     <div className="row">
                         {/* SIDEBAR */}
-                        <div className="col-sm-4 col-md-4 col-lg-3">
+                        <div className="col-sm-3 col-md-4 col-lg-3">
                             <ul className="nav flex-column nav-pills sidebar">
                                 <li className="nav-item">
                                     <a className="nav-link active" href="#">My Profile</a>
@@ -58,7 +58,7 @@ export default class Profile extends Component {
                             </ul>
                         </div>
                         {/* CONTENT */}
-                        <div className="col-sm-8 col-md-8">
+                        <div className="col-sm-9 col-md-8 col-lg">
                             <div className="container">
                                 <div className="name-avatar">
                                     <img className="user-avatar" src={Avatar} />
@@ -100,7 +100,7 @@ export default class Profile extends Component {
                                                 <label>Current password</label>
                                                 <input type={passwordType} name="current-pwd" />
                                                 <i 
-                                                    className={showPasswordIcon}
+                                                    className={ShowPasswordIcon}
                                                     onClick={this.onShowPasswordClick}></i>
                                             </div>
                                         </div>
@@ -111,7 +111,7 @@ export default class Profile extends Component {
                                                 <label>New password</label>
                                                 <input type={passwordType} name="new-pwd" />
                                                 <i 
-                                                    className={showPasswordIcon}
+                                                    className={ShowPasswordIcon}
                                                     onClick={this.onShowPasswordClick}></i>
                                             </div>
                                         </div>
@@ -120,7 +120,7 @@ export default class Profile extends Component {
                                                 <label>Confirm password</label>
                                                 <input type={passwordType} name="confirm-pwd" />
                                                 <i 
-                                                    className={showPasswordIcon}
+                                                    className={ShowPasswordIcon}
                                                     onClick={this.onShowPasswordClick}></i>
                                             </div>
                                         </div>
