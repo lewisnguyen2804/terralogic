@@ -1,6 +1,3 @@
-@import '../../style.scss';
-
-
 // LABEL
 .change-pwd-label {
     color: $second-color;
@@ -26,11 +23,13 @@ hr {
 
 .save-logout {
     .button-type-1 {
+        height: 60px;
         margin-right: 20px;
         width: 100%;
         max-width: 200px;
     }
     .button-type-2 {
+        height: 60px;
         width: 100%;
         max-width: 200px;
     }

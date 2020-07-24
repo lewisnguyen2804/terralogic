@@ -1,11 +1,7 @@
-@import '../../style.scss';
-
-
 // BUTTONS
 .main-button {
     border: none;
     border-radius: 30px;
-    height: 60px;
     @extend .bold-font;
     font-size: 1.2rem;
     outline: none;

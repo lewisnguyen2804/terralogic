@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 
-import './style.scss'
 import Avatar from '../../assets/images/img_avatar.png'
 import ShowPasswordIcon from '../../assets/images/Suche03.svg';
 

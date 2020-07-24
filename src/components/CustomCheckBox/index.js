@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './style.scss'
 
 export default class CustomCheckBox extends Component {
     render() {

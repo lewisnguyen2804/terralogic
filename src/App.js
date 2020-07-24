@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './styles/style.scss';
 
 import Login from './pages/Login';
 import {

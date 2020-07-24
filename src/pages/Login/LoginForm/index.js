@@ -2,8 +2,6 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 
-import './style.scss'
-
 import EmailIcon from '../../../assets/images/Suche.svg'
 import PasswordIcon from '../../../assets/images/Suche02.svg'
 import ShowPasswordIcon from '../../../assets/images/Suche03.svg'
