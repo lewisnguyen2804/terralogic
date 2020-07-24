@@ -1,0 +1,37 @@
+@import '../../style.scss';
+
+// INPUTS
+.input-group {
+    position: relative;
+    margin-bottom: 23px;
+    > label {
+        font-size: 0.9rem;
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        background-color: white;
+        padding: 0 5px 0 5px;
+    }
+    > input {
+        border: 2px solid #212020a6;
+        padding: 10px;
+        height: 70px;
+        border-radius: 4px;
+        width: 100%;
+        @extend .bold-font;
+        // font-weight: bold;
+    }
+}
+
+
+// ICON PASSWORD
+.show-hide-pwd-icon {
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+    top: 25px;
+    color: $third-color;
+    cursor: pointer;
+    height: 20px;
+    filter: invert(42%) sepia(99%) saturate(7489%) hue-rotate(284deg) brightness(94%) contrast(109%);
+}

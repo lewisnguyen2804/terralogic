@@ -1,32 +1,46 @@
 import React, { Component } from 'react'
 import './style.scss'
 import Avatar from '../../assets/images/img_avatar.png'
+import ShowPasswordIcon from '../../assets/images/Suche03.svg';
+
+import PageTitle from '../../components/PageTitle';
+import UserCard from './UserCard';
+import SquaredInput from '../../components/SquaredInput';
+import CustomButton from '../../components/CustomButton';
 
 export default class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showPassword: true
+            showPassword: false,
+            fullName: 'Lewis Nguyen',
+            email: 'lewisnguyen@terralogic.com',
+            phone: '+8412323513',
+            currentPwd: '123456',
+            newPwd: '12345678',
+            confirmPwd: '12345678'
         }
     }
 
+    // HANDLE INPUTS
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+    };
+
+    // SHOW/HIDE PASSWORD
     onShowPasswordClick = () => {
-        this.setState({showPassword: !this.state.showPassword})
+        this.setState({ showPassword: !this.state.showPassword })
     }
 
     render() {
-        const showPasswordIcon = this.state.showPassword ? "fa fa-eye show-hide-pwd-icon":"fa fa-eye-slash show-hide-pwd-icon";
-        const passwordType = this.state.showPassword ? "password" : "text";
-
+        const passwordType = this.state.showPassword ? "text" : "password";
         return (
             <div>
-                <div className="container-fluid header">
-                    <div className="container header-text">
-                        <h2>My Profile</h2>
-                        <p>Manage your profile and contact information.</p>
-                    </div>
-                </div>
-
+                <PageTitle
+                    title="My Profile"
+                    description="Manage your profile and contact information." />
                 <div className="container content">
                     <div className="row">
                         {/* SIDEBAR */}

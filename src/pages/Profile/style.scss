@@ -1,3 +1,6 @@
+
+@import '../../style.scss';
+
 $main-color: #4d0c5a;
 $second-color: #bfc2d3;
 $third-color: #2a9cdd;
@@ -95,51 +98,22 @@ $third-color: #2a9cdd;
     }
 }
 
-// BUTTONS
-.main-button {
-    border: none;
-    border-radius: 30px;
-    height: 60px;
-    padding: {
-        left: 40px;
-        right: 40px;
-    }
-    @extend .bold-font;
-    font-size: 1.2rem;
-    outline: none;
-    &:hover {
-        opacity: 0.9;
-    }
-}
-
-.save-button {
-    @extend .main-button;
-    background-color: $third-color;
-    color: white;
-    margin-right: 35px;
-}
-
-.logout-button {
-    @extend .main-button;
-    background-color: white;
-    color: $third-color;
-    border: 1px solid $third-color;
-}
-
 // AREA
 .save-logout {
+    display: flex;
     margin: {
         bottom: 40px;
     }
 }
 
-// ICON PASSWORD
-.show-hide-pwd-icon {
-    position: absolute;
-    right: 0;
-    margin-right: 30px;
-    top: 23px;
-    font-size: 1.5rem;
-    color: $third-color;
-    cursor: pointer;
+.save-logout {
+    .button-type-1 {
+        margin-right: 20px;
+        width: 100%;
+        max-width: 200px;
+    }
+    .button-type-2 {
+        width: 100%;
+        max-width: 200px;
+    }
 }
