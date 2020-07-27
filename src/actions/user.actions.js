@@ -42,7 +42,7 @@ let login = (userLogin) => {
                         
                         // get information of logged user - jwt decode
                         dispatch(successLoggedUser(userService.getProfile(user)));
-                        
+
                         dispatch(alertActions.clear())
                         history.push('/');
                     }
@@ -97,8 +97,29 @@ let register = (userRegister) => {
     };
 }
 
+let uploadImage = (formData, token) => {
+    return dispatch => {
+        userService.uploadImage(formData, token)
+    }
+}
+
+let updateInformation = (data, token) => {
+    return dispatch => {
+        userService.updateInformation(data, token)
+    }
+}
+
+let changePassword = (data, token) => {
+    return dispatch => {
+        userService.changePassword(data, token)
+    }
+}
+
 export const userActions = {
     login,
     register,
-    logout
+    logout,
+    uploadImage,
+    updateInformation,
+    changePassword
 };

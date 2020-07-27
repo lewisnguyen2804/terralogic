@@ -104,7 +104,7 @@ let register = async (user) => {
         password: user.password,
         name: user.name,
         phone: user.phone
-    } 
+    }
 
     if (validationRegister(user).status === 1) {
         var options = {
@@ -114,7 +114,7 @@ let register = async (user) => {
             },
             body: JSON.stringify(userRequest)
         };
-    
+
         try {
             let fetchResponse = await fetch(`${apiUrl}/register`, options);
             let data = await fetchResponse.json();
@@ -135,10 +135,80 @@ let getProfile = (userLoggedIn) => {
     return decoded
 }
 
+let uploadImage = async (formData, token) => {
+    let authorizationCode = `Bearer ${token}`;
+    var options = {
+        'method': 'POST',
+        'headers': {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': authorizationCode,
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: formData
+    };
+
+    try {
+        console.log("uploading"); //
+        let fetchResponse = await fetch(`${apiUrl}/upload`, options);
+        console.log("done"); //
+    } catch (e) {
+        console.log("error: " + e);
+    }
+}
+
+let updateInformation = async (data, token) => {
+    var raw = JSON.stringify(data);
+
+    let authorizationCode = `Bearer ${token}`;
+    var options = {
+        'method': 'PATCH',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': authorizationCode,
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: raw
+    };
+
+    try {
+        console.log("updating"); //
+        let fetchResponse = await fetch(`${apiUrl}/update`, options);
+        console.log("done"); //
+    } catch (e) {
+        console.log("error: " + e);
+    }
+}
+
+
+let changePassword = async (data, token) => {
+    var raw = JSON.stringify(data);
+    let authorizationCode = `Bearer ${token}`;
+    var options = {
+        'method': 'POST',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': authorizationCode,
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: raw
+    };
+
+    try {
+        console.log("updating"); //
+        let fetchResponse = await fetch(`${apiUrl}/changePassword`, options);
+        console.log("done"); //
+    } catch (e) {
+        console.log("error: " + e);
+    }
+}
+
 
 export const userService = {
     login,
     register,
     logout,
-    getProfile
+    getProfile,
+    uploadImage,
+    updateInformation,
+    changePassword
 };

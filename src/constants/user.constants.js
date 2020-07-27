@@ -9,5 +9,7 @@ export const userConstants = {
     
     LOGGED_USER: 'LOGGED_USER',
     
+    IMAGE_UPLOADED: 'IMAGE_UPLOADED',
+
     LOGOUT: 'USERS_LOGOUT'
 };

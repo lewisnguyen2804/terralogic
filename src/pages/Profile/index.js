@@ -24,22 +24,64 @@ class Profile extends Component {
             confirmPwd: '',
             showCurrentPwd: false,
             showNewPwd: false,
-            showConfirmPwd: false
+            showConfirmPwd: false,
+            avatarPath: '',
+            selectedFile: null
         }
+    }
+
+    // UPLOAD FILES/IMAGES
+    handleUploadClick = (event) => {
+        this.refs.fileUploader.click();
+    }
+
+    onFileChange = (event) => {
+        this.uploadFile(event.target.files[0]) 
+    };
+
+    uploadFile = (selectedFile) => {
+        const formData = new FormData();
+        formData.append('image', selectedFile, selectedFile.name);
+        this.props.uploadImage(formData, this.props.user.token)
+    }
+
+    // EDIT PROFILE
+    editProfile = () => {
+        this.updateInformation();
+        this.changePassword();
+    }
+
+    // UPDATE INFORMATION
+    updateInformation = () => {
+        const data = {
+            name: this.state.fullName,
+            email: this.state.email,
+            phone: this.state.phone
+        }
+        this.props.updateInformation(data,this.props.user.token)
+    }
+
+    // CHANGE PASSWORD
+    changePassword = () => {
+        const data = {
+            "password": this.state.newPwd,
+            "currentPassword": this.state.currentPwd
+        }
+        this.props.changePassword(data, this.props.user.token)
     }
 
     componentDidMount = () => {
         try {
             this.setState({
-                fullName: this.props.user.displayName,
-                email: this.props.user.email,
-                phone: this.props.user.phone
+                fullName: this.props.userLogged.name,
+                email: this.props.userLogged.email,
+                phone: this.props.userLogged.phone,
             })
-        } catch(e) {
+        } catch (e) {
             console.log("error get profile: " + e);
         }
     }
-    
+
     // HANDLE INPUTS
     handleChange = (event) => {
         this.setState({
@@ -64,7 +106,7 @@ class Profile extends Component {
     onLogOutClick = () => {
         this.props.logout();
     }
-    
+
     render() {
         const currentPasswordType = this.state.showCurrentPwd ? "text" : "password";
         const newPasswordType = this.state.showNewPwd ? "text" : "password";
@@ -79,7 +121,16 @@ class Profile extends Component {
                 <div className="container">
                     <UserCard
                         image={Avatar}
-                        name={this.state.fullName} />
+                        name={this.state.fullName}
+                        handleClick={this.handleUploadClick}
+                    />
+
+                    {/* UPLOAD IMAGE */}
+                    <input
+                        type="file"
+                        ref="fileUploader"
+                        onChange={this.onFileChange}
+                        style={{ display: "none" }} />
 
                     <div className="contact-information">
                         <div className="row">
@@ -172,6 +223,7 @@ class Profile extends Component {
                         <CustomButton
                             type="button"
                             className="button-type-1"
+                            onClick={this.editProfile}
                             value="Save" />
                         <CustomButton
                             type="button"
@@ -186,14 +238,19 @@ class Profile extends Component {
 }
 
 function mapStateToProps(state) {
-    const { authentication } = state;
+    const { logged, authentication } = state;
+    const { userLogged } = logged;
     const { user } = authentication;
-    return { user };
+
+    return { userLogged, user };
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        logout: userActions.logout
+        logout: userActions.logout,
+        uploadImage: userActions.uploadImage,
+        updateInformation: userActions.updateInformation,
+        changePassword: userActions.changePassword
     }, dispatch)
 }
 
