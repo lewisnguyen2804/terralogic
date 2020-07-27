@@ -27,10 +27,10 @@ let validationLogin = (user) => {
         msg = `"${user.email}" is not an email`;
         isError = true;
     }
-    // else if (user.password.length < 8) {
-    //     msg = 'Password must be at least 8 characters';
-    //     isError = true;
-    // }
+    else if (user.password.length < 8) {
+        msg = 'Password must be at least 8 characters';
+        isError = true;
+    }
     if (isError) {
         return { msg: msg, status: 0 }
     }

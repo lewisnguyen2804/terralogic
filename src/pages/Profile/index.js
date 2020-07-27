@@ -25,8 +25,9 @@ class Profile extends Component {
             showCurrentPwd: false,
             showNewPwd: false,
             showConfirmPwd: false,
-            avatarPath: '',
-            selectedFile: null
+
+            isUpdatingInformation: false,
+            isChangingPassword: false
         }
     }
 
@@ -36,7 +37,7 @@ class Profile extends Component {
     }
 
     onFileChange = (event) => {
-        this.uploadFile(event.target.files[0]) 
+        this.uploadFile(event.target.files[0])
     };
 
     uploadFile = (selectedFile) => {
@@ -47,8 +48,12 @@ class Profile extends Component {
 
     // EDIT PROFILE
     editProfile = () => {
-        this.updateInformation();
-        this.changePassword();
+        if (this.state.isUpdatingInformation === true) {
+            this.updateInformation();
+        }
+        if (this.state.isChangingPassword === true) {
+            this.changePassword();
+        }
     }
 
     // UPDATE INFORMATION
@@ -58,7 +63,7 @@ class Profile extends Component {
             email: this.state.email,
             phone: this.state.phone
         }
-        this.props.updateInformation(data,this.props.user.token)
+        this.props.updateInformation(data, this.props.user.token)
     }
 
     // CHANGE PASSWORD
@@ -87,6 +92,28 @@ class Profile extends Component {
         this.setState({
             [event.target.name]: event.target.value,
         });
+        let isUpdatingInformation = false;
+        let isChangingPassword = false;
+
+        // CHECK IF USER IS UPDATING PROFILE
+        if ((this.state.fullName !== this.props.userLogged.name)
+            || (this.state.email !== this.props.userLogged.email)
+            || (this.state.phone !== this.props.userLogged.phone)) {
+                isUpdatingInformation = true
+        }
+        else {
+            isUpdatingInformation = false
+        }
+        if ((this.state.currentPwd !== '')
+            || (this.state.newPwd !== '')
+            || (this.state.confirmPwd !== '')) {
+                isChangingPassword = true
+        }
+        else {
+            isChangingPassword = false
+        }
+
+        this.setState({ isChangingPassword, isUpdatingInformation })
     };
 
     // SHOW/HIDE PASSWORD

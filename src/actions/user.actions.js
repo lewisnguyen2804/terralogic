@@ -38,11 +38,12 @@ let login = (userLogin) => {
                         dispatch(alertActions.error(user.msg));
                     }
                     else if (user.status === 1) {
+                        dispatch(alertActions.success(user.msg));
                         dispatch(success(user));
-                        
+
                         // get information of logged user - jwt decode
                         dispatch(successLoggedUser(userService.getProfile(user)));
-
+                        
                         dispatch(alertActions.clear())
                         history.push('/');
                     }
@@ -89,7 +90,7 @@ let register = (userRegister) => {
                     }
                     else if (user.status === 1) {
                         dispatch(success(user));
-                        dispatch(alertActions.success("Registration successful!"));
+                        dispatch(alertActions.success(user.msg));
                         history.push('/login');
                     }
                 }
