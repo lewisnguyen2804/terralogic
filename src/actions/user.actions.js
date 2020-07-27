@@ -1,6 +1,6 @@
 import { userConstants } from '../constants';
 import { userService } from '../services';
-
+import { alertActions } from './';
 import { history } from '../helpers';
 
 let login = (userLogin) => {
@@ -22,6 +22,12 @@ let login = (userLogin) => {
             user
         }
     }
+    let successLoggedUser = (user) => {
+        return {
+            type: userConstants.LOGGED_USER,
+            user
+        }
+    }
     return dispatch => {
         dispatch(request(userLogin));
         userService.login(userLogin)
@@ -29,9 +35,15 @@ let login = (userLogin) => {
                 user => {
                     if (user.status === 0) {
                         dispatch(failure(user));
+                        dispatch(alertActions.error(user.msg));
                     }
                     else if (user.status === 1) {
                         dispatch(success(user));
+                        
+                        // get information of logged user - jwt decode
+                        dispatch(successLoggedUser(userService.getProfile(user)));
+                        
+                        dispatch(alertActions.clear())
                         history.push('/');
                     }
                 }
@@ -42,7 +54,9 @@ let login = (userLogin) => {
 let logout = () => {
     userService.logout();
     history.push('/');
-    return { type: userConstants.LOGOUT };
+    return {
+        type: userConstants.LOGOUT
+    };
 }
 
 let register = (userRegister) => {
@@ -71,9 +85,11 @@ let register = (userRegister) => {
                 user => {
                     if (user.status === 0) {
                         dispatch(failure(user));
+                        dispatch(alertActions.error(user.msg));
                     }
                     else if (user.status === 1) {
                         dispatch(success(user));
+                        dispatch(alertActions.success("Registration successful!"));
                         history.push('/login');
                     }
                 }

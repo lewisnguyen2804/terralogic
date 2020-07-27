@@ -16,18 +16,30 @@ class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fullName: 'Lewis Nguyen',
-            email: 'lewisnguyen@terralogic.com',
-            phone: '+8412323513',
-            currentPwd: '123456',
-            newPwd: '12345678',
-            confirmPwd: '12345678',
+            fullName: '',
+            email: '',
+            phone: '',
+            currentPwd: '',
+            newPwd: '',
+            confirmPwd: '',
             showCurrentPwd: false,
             showNewPwd: false,
             showConfirmPwd: false
         }
     }
 
+    componentDidMount = () => {
+        try {
+            this.setState({
+                fullName: this.props.user.displayName,
+                email: this.props.user.email,
+                phone: this.props.user.phone
+            })
+        } catch(e) {
+            console.log("error get profile: " + e);
+        }
+    }
+    
     // HANDLE INPUTS
     handleChange = (event) => {
         this.setState({
@@ -173,10 +185,12 @@ class Profile extends Component {
     }
 }
 
-
 function mapStateToProps(state) {
-    return {}
+    const { authentication } = state;
+    const { user } = authentication;
+    return { user };
 }
+
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         logout: userActions.logout

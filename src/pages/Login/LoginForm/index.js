@@ -23,8 +23,6 @@ class LoginForm extends Component {
                 email: '',
                 password: ''
             },
-            isError: false,
-            errorMsg: '',
             showPassword: false,
             rememberPassword: false
         }
@@ -43,45 +41,12 @@ class LoginForm extends Component {
         });
     };
 
-    // VALIDATE EMAIL
-    validate = (email) => {
-        const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
-        return expression.test(String(email).toLowerCase())
-    }
-
+    
     // SUBMIT FORM
     handleSubmit = async (event) => {
         event.preventDefault();
-        let errorMsg = '';
-        let isError = false;
-        if (this.state.user.email === '' && this.state.user.password === '') {
-            errorMsg = 'Please type your email and password to login';
-            isError = true;
-        }
-        else if (this.state.user.email === '' && this.state.user.password !== '') {
-            errorMsg = 'Please type your email';
-            isError = true;
-        }
-        else if (this.state.user.email !== '' && this.state.user.password === '') {
-            errorMsg = 'Please type your password';
-            isError = true;
-        }
-        else if (!this.validate(this.state.user.email)) {
-            errorMsg = `"${this.state.email}" is not an email`;
-            isError = true;
-        }
-        // else if (this.state.user.password.length < 6) {
-        //     errorMsg = 'Password must be at least 6 characters';
-        //     isError = true;
-        // }
-        else {
-            errorMsg = '';
-            isError = false;
-
-            // START TO LOGIN
-            this.props.login(this.state.user);
-        }
-        this.setState({ error: errorMsg, isError: isError });
+        // START TO LOGIN
+        this.props.login(this.state.user);
     }
 
     // SHOW/HIDE PASSWORD
@@ -100,13 +65,6 @@ class LoginForm extends Component {
         return (
             <div className="login-form">
                 <h2 className="form-title">Login Your Account</h2>
-
-                {/* ERROR MESSAGE */}
-                {this.state.isError ?
-                    <div className="alert alert-danger alert-dismissible">
-                        <strong>{this.state.error}</strong>
-                    </div> : <div></div>
-                }
 
                 <form className="form-main" onSubmit={this.handleSubmit}>
                     <RoundedInput

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import './styles/style.scss';
 
@@ -8,28 +8,47 @@ import {
 	Switch,
 	Route
 } from "react-router-dom";
+
 import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
-
-import { history } from './helpers';
 import ProfileContainer from './pages/Profile';
 
-function App() {
-	return (
-		<Router history={history}>
-			<div>
-				<Switch>
-					<PrivateRoute exact path="/" component={ProfileContainer} />
-					<Route path="/login">
-						<Login />
-					</Route>
-					<Route path="/register">
-						<Register />
-					</Route>
-				</Switch>
+import { history } from './helpers';
+import { connect } from 'react-redux';
+
+class App extends Component {
+	render() {
+		const { alert } = this.props;
+		return (
+			<div className="">
+					{alert.message &&
+						<div className="text-center bg-danger text-white p-2 fixed-top">
+							{alert.message}
+						</div>
+					}
+
+					<Router history={history}>
+						<div>
+							<Switch>
+								<PrivateRoute exact path="/" component={ProfileContainer} />
+								<Route path="/login">
+									<Login />
+								</Route>
+								<Route path="/register">
+									<Register />
+								</Route>
+							</Switch>
+						</div>
+					</Router>
 			</div>
-		</Router>
-	);
+		);
+	}
 }
 
-export default App;
+let mapStateToProps = (state) => {
+	const { alert } = state;
+	return { alert };
+}
+
+const ConnectedApp = connect(mapStateToProps)(App);
+export default ConnectedApp;
