@@ -73,16 +73,7 @@ class Profile extends Component {
         localStorage.setItem('userLogged', JSON.stringify(newUser));
     }
 
-    // updateImageLocalStorage = () => {
-    //     let image = JSON.parse(localStorage.getItem('userImage'));
-    //     let value = JSON.parse(localStorage.getItem('userLogged'));
-    //     let newImage = {
-    //         ...value,
-    //         avatar: image.data
-    //     }
-    //     localStorage.setItem('userLogged', JSON.stringify(newImage))
-    // }
-
+    
     // UPLOAD FILES/IMAGES
     handleUploadClick = (event) => {
         this.refs.fileUploader.click();

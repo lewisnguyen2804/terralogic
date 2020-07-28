@@ -25,6 +25,9 @@
         &::placeholder {
             color: #dfe2e6;
         }
+        &:focus {
+            border: 1px solid $third-color;
+        }
     }
     .show-password-icon {
         position: absolute;
