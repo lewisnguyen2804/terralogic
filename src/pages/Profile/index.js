@@ -27,8 +27,48 @@ class Profile extends Component {
             showConfirmPwd: false,
 
             isUpdatingInformation: false,
-            isChangingPassword: false
+            isChangingPassword: false,
+
+            user: null,
+            userLogged: null
+        };
+
+    }
+
+    componentDidMount = () => {
+        let userLogged = localStorage.getItem('userLogged');
+        let userLoggedObj = JSON.parse(userLogged);
+        let user = localStorage.getItem('user');
+        let userObj = JSON.parse(user);
+
+        try {
+            this.setState({
+                user: userObj,
+                userLogged: userLoggedObj,
+                fullName: userLoggedObj.name,
+                email: userLoggedObj.email,
+                phone: userLoggedObj.phone,
+            })
+        } catch (e) {
+            console.log("error get profile: " + e);
         }
+    }
+
+    // UPDATE LOCAL STORAGE
+    updateLocalStorage = () => {
+        let value = JSON.parse(localStorage.getItem('userLogged'));
+        let newUser = {}
+        if (value.email !== this.state.email || value.name !== this.state.name || value.phone !== this.state.phone) {
+            newUser = {
+                ...value,
+                email: this.state.email,
+                name: this.state.fullName,
+                phone: this.state.phone,
+                displayName: this.state.fullName,
+            }
+        }
+        console.log("new user: ", newUser)
+        localStorage.setItem('userLogged', JSON.stringify(newUser));
     }
 
     // UPLOAD FILES/IMAGES
@@ -37,14 +77,14 @@ class Profile extends Component {
     }
 
     onFileChange = (event) => {
-        this.uploadFile(event.target.files[0])
+        let file = event.target.files[0];
+        if (file) {
+            let formData = new FormData();
+            formData.append('file', file);
+            console.log("token: ", this.state.user.token)
+            this.props.uploadImage(formData, this.state.user.token)
+        }
     };
-
-    uploadFile = (selectedFile) => {
-        const formData = new FormData();
-        formData.append('image', selectedFile, selectedFile.name);
-        this.props.uploadImage(formData, this.props.user.token)
-    }
 
     // EDIT PROFILE
     editProfile = () => {
@@ -63,7 +103,8 @@ class Profile extends Component {
             email: this.state.email,
             phone: this.state.phone
         }
-        this.props.updateInformation(data, this.props.user.token)
+        this.props.updateInformation(data, this.state.user.token)
+        this.updateLocalStorage()
     }
 
     // CHANGE PASSWORD
@@ -72,21 +113,10 @@ class Profile extends Component {
             "password": this.state.newPwd,
             "currentPassword": this.state.currentPwd
         }
-        this.props.changePassword(data, this.props.user.token)
+        this.props.changePassword(data, this.state.user.token)
     }
 
-    componentDidMount = () => {
-        try {
-            this.setState({
-                fullName: this.props.userLogged.name,
-                email: this.props.userLogged.email,
-                phone: this.props.userLogged.phone,
-            })
-        } catch (e) {
-            console.log("error get profile: " + e);
-        }
-    }
-
+    
     // HANDLE INPUTS
     handleChange = (event) => {
         this.setState({
@@ -96,9 +126,9 @@ class Profile extends Component {
         let isChangingPassword = false;
 
         // CHECK IF USER IS UPDATING PROFILE
-        if ((this.state.fullName !== this.props.userLogged.name)
-            || (this.state.email !== this.props.userLogged.email)
-            || (this.state.phone !== this.props.userLogged.phone)) {
+        if ((this.state.fullName !== this.state.userLogged.name)
+            || (this.state.email !== this.state.userLogged.email)
+            || (this.state.phone !== this.state.userLogged.phone)) {
                 isUpdatingInformation = true
         }
         else {
@@ -138,6 +168,7 @@ class Profile extends Component {
         const currentPasswordType = this.state.showCurrentPwd ? "text" : "password";
         const newPasswordType = this.state.showNewPwd ? "text" : "password";
         const confirmPasswordType = this.state.showConfirmPwd ? "text" : "password";
+        const isChangingInformation = (this.state.isChangingPassword || this.state.isUpdatingInformation) ? "button-type-1 button-enable" : "button-type-1 button-disable";
 
         return (
             <div>
@@ -153,8 +184,7 @@ class Profile extends Component {
                     />
 
                     {/* UPLOAD IMAGE */}
-                    <input
-                        type="file"
+                    <input type="file"
                         ref="fileUploader"
                         onChange={this.onFileChange}
                         style={{ display: "none" }} />
@@ -249,7 +279,7 @@ class Profile extends Component {
                     <div className="save-logout">
                         <CustomButton
                             type="button"
-                            className="button-type-1"
+                            className={isChangingInformation}
                             onClick={this.editProfile}
                             value="Save" />
                         <CustomButton
@@ -264,15 +294,16 @@ class Profile extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    const { logged, authentication } = state;
-    const { userLogged } = logged;
-    const { user } = authentication;
+let mapStateToProps = (state) => {
+    // const { logged, authentication } = state;
+    // const { user } = authentication;
+    // const { userLogged } = logged;
 
-    return { userLogged, user };
+    // return { user, userLogged };
+    return {}
 }
 
-function mapDispatchToProps(dispatch) {
+let mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         logout: userActions.logout,
         uploadImage: userActions.uploadImage,

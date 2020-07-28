@@ -30,6 +30,7 @@ let login = (userLogin) => {
     }
     return dispatch => {
         dispatch(request(userLogin));
+        dispatch(alertActions.clear())
         userService.login(userLogin)
             .then(
                 user => {
@@ -38,7 +39,6 @@ let login = (userLogin) => {
                         dispatch(alertActions.error(user.msg));
                     }
                     else if (user.status === 1) {
-                        dispatch(alertActions.success(user.msg));
                         dispatch(success(user));
 
                         // get information of logged user - jwt decode
@@ -54,10 +54,14 @@ let login = (userLogin) => {
 
 let logout = () => {
     userService.logout();
-    history.push('/');
-    return {
-        type: userConstants.LOGOUT
-    };
+    return dispatch => {
+        dispatch(alertActions.clear())
+        history.push('/');
+        return {
+            type: userConstants.LOGOUT
+        };
+    }
+   
 }
 
 let register = (userRegister) => {
@@ -81,6 +85,7 @@ let register = (userRegister) => {
     }
     return dispatch => {
         dispatch(request(userRegister));
+        dispatch(alertActions.clear())
         userService.register(userRegister)
             .then(
                 user => {
@@ -91,7 +96,7 @@ let register = (userRegister) => {
                     else if (user.status === 1) {
                         dispatch(success(user));
                         dispatch(alertActions.success(user.msg));
-                        history.push('/login');
+                        // history.push('/login');
                     }
                 }
             );
@@ -101,18 +106,48 @@ let register = (userRegister) => {
 let uploadImage = (formData, token) => {
     return dispatch => {
         userService.uploadImage(formData, token)
+        .then(
+            user => {
+                if (user.status === 0) {
+                    dispatch(alertActions.error(user.msg));
+                }
+                else if (user.status === 1) {
+                    dispatch(alertActions.success(user.msg));
+                }
+            }
+        )
     }
 }
 
 let updateInformation = (data, token) => {
     return dispatch => {
         userService.updateInformation(data, token)
+        .then(
+            user => {
+                if (user.status === 0) {
+                    dispatch(alertActions.error(user.msg));
+                }
+                else if (user.status === 1) {
+                    dispatch(alertActions.success(user.msg));
+                }
+            }
+        )
     }
 }
 
 let changePassword = (data, token) => {
     return dispatch => {
         userService.changePassword(data, token)
+        .then(
+            user => {
+                if (user.status === 0) {
+                    dispatch(alertActions.error(user.msg));
+                }
+                else if (user.status === 1) {
+                    dispatch(alertActions.success(user.msg));
+                }
+            }
+        )
     }
 }
 

@@ -79,7 +79,7 @@ let login = async (user) => {
             let fetchResponse = await fetch(`${apiUrl}/login`, options);
             let data = await fetchResponse.json();
             console.log(data); //
-            localStorage.setItem('user', data);
+            localStorage.setItem('user', JSON.stringify(data));
             return data;
         } catch (e) {
             // SOMETHING WRONG WITH LOGIN
@@ -95,6 +95,7 @@ let login = async (user) => {
 let logout = () => {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
+    localStorage.removeItem('userLogged');
 }
 
 // REGISTER
@@ -132,6 +133,7 @@ let register = async (user) => {
 
 let getProfile = (userLoggedIn) => {
     var decoded = JWT(userLoggedIn.token);
+    localStorage.setItem('userLogged', JSON.stringify(decoded));
     return decoded
 }
 
@@ -148,6 +150,7 @@ let uploadImage = async (formData, token) => {
     };
 
     try {
+        console.log("options: ", options.body); 
         console.log("uploading"); //
         let fetchResponse = await fetch(`${apiUrl}/upload`, options);
         console.log("done"); //
@@ -157,8 +160,6 @@ let uploadImage = async (formData, token) => {
 }
 
 let updateInformation = async (data, token) => {
-    var raw = JSON.stringify(data);
-
     let authorizationCode = `Bearer ${token}`;
     var options = {
         'method': 'PATCH',
@@ -167,13 +168,15 @@ let updateInformation = async (data, token) => {
             'Authorization': authorizationCode,
             'Access-Control-Allow-Origin': '*'
         },
-        body: raw
+        body: JSON.stringify(data)
     };
 
     try {
-        console.log("updating"); //
+        console.log("updating Information"); //
         let fetchResponse = await fetch(`${apiUrl}/update`, options);
-        console.log("done"); //
+        let data = await fetchResponse.json();
+        console.log("update: ", data)
+        return data
     } catch (e) {
         console.log("error: " + e);
     }
@@ -181,7 +184,6 @@ let updateInformation = async (data, token) => {
 
 
 let changePassword = async (data, token) => {
-    var raw = JSON.stringify(data);
     let authorizationCode = `Bearer ${token}`;
     var options = {
         'method': 'POST',
@@ -190,13 +192,14 @@ let changePassword = async (data, token) => {
             'Authorization': authorizationCode,
             'Access-Control-Allow-Origin': '*'
         },
-        body: raw
+        body: JSON.stringify(data)
     };
 
     try {
         console.log("updating"); //
         let fetchResponse = await fetch(`${apiUrl}/changePassword`, options);
-        console.log("done"); //
+        let data = await fetchResponse.json();
+        return data
     } catch (e) {
         console.log("error: " + e);
     }

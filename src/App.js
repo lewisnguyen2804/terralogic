@@ -20,26 +20,26 @@ class App extends Component {
 	render() {
 		const { alert } = this.props;
 		return (
-			<div className="">
-					{alert.message &&
-						<div className="text-center bg-danger text-white p-2 fixed-top">
-							{alert.message}
-						</div>
-					}
+			<div>
+				{alert.message &&
+					<div className="text-center bg-danger text-white p-2 fixed-top">
+						{alert.message}
+					</div>
+				}
 
-					<Router history={history}>
-						<div>
-							<Switch>
-								<PrivateRoute exact path="/" component={ProfileContainer} />
-								<Route path="/login">
-									<Login />
-								</Route>
-								<Route path="/register">
-									<Register />
-								</Route>
-							</Switch>
-						</div>
-					</Router>
+				<Router history={history}>
+					<div>
+						<Switch>
+							<PrivateRoute exact path="/" component={ProfileContainer} />
+							<Route path="/login">
+								<Login />
+							</Route>
+							<Route path="/register">
+								<Register />
+							</Route>
+						</Switch>
+					</div>
+				</Router>
 			</div>
 		);
 	}

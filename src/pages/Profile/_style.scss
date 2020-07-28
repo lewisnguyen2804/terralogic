@@ -33,4 +33,12 @@ hr {
         width: 100%;
         max-width: 200px;
     }
+    .button-disable {
+        pointer-events:none;
+        opacity:0.5;
+    }
+    .button-enable {
+        pointer-events: auto;
+        opacity: 1;
+    }
 }
