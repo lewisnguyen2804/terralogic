@@ -42,9 +42,6 @@ class Profile extends Component {
         // user with token
         let user = localStorage.getItem('user');
         let userObj = JSON.parse(user);
-        // user with token
-        let userImage = localStorage.getItem('userImage');
-        let userImageObj = JSON.parse(userImage);
 
         try {
             this.setState({
@@ -53,7 +50,7 @@ class Profile extends Component {
                 fullName: userLoggedObj.name,
                 email: userLoggedObj.email,
                 phone: userLoggedObj.phone,
-                userImage: userImageObj.data
+                userImage: userLoggedObj.avatar
             })
         } catch (e) {
             console.log("error get profile: " + e);
@@ -76,28 +73,28 @@ class Profile extends Component {
         localStorage.setItem('userLogged', JSON.stringify(newUser));
     }
 
-    updateImageLocalStorage = () => {
-        let value = JSON.parse(localStorage.getItem('userImage'));
-        let newImage = {
-                ...value,
-                data: this.props.link
-            }
-        localStorage.setItem('userImage', JSON.stringify(newImage))
-    }
+    // updateImageLocalStorage = () => {
+    //     let image = JSON.parse(localStorage.getItem('userImage'));
+    //     let value = JSON.parse(localStorage.getItem('userLogged'));
+    //     let newImage = {
+    //         ...value,
+    //         avatar: image.data
+    //     }
+    //     localStorage.setItem('userLogged', JSON.stringify(newImage))
+    // }
 
     // UPLOAD FILES/IMAGES
     handleUploadClick = (event) => {
         this.refs.fileUploader.click();
     }
 
-    onFileChange = async (event) => {
+    onFileChange = (event) => {
         const file = event.target.files[0];
 
         if (file) {
             const dataForm = new FormData();
             dataForm.append("username", file);
-            this.props.uploadImage(dataForm, this.state.user.token);
-            this.updateAvatar();
+            this.props.uploadImage(dataForm, this.state.user.token)
         }
     };
 
@@ -120,15 +117,6 @@ class Profile extends Component {
         }
         this.props.updateInformation(data, this.state.user.token)
         this.updateLocalStorage()
-    }
-
-    // UPDATE AVATAR
-    updateAvatar = () => {
-        const data = {
-            avatar: this.props.link
-        }
-        this.props.updateInformation(data, this.state.user.token)
-        this.updateImageLocalStorage()
     }
 
     // CHANGE PASSWORD
