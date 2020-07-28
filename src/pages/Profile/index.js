@@ -197,7 +197,7 @@ class Profile extends Component {
 
                     <div className="contact-information">
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-sm-6">
                                 <SquaredInput
                                     type="text"
                                     title="Full Name"
@@ -209,7 +209,7 @@ class Profile extends Component {
                         </div>
 
                         <div className="row">
-                            <div className="col-md">
+                            <div className="col-sm">
                                 <SquaredInput
                                     type="text"
                                     title="Email"
@@ -218,7 +218,7 @@ class Profile extends Component {
                                     handleChange={this.handleChange}
                                 />
                             </div>
-                            <div className="col-md">
+                            <div className="col-sm">
                                 <SquaredInput
                                     type="text"
                                     title="Phone"
@@ -234,7 +234,7 @@ class Profile extends Component {
 
                     <div className="password-change">
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-sm-6">
                                 <SquaredInput
                                     isPassword="true"
                                     type={currentPasswordType}
@@ -251,7 +251,7 @@ class Profile extends Component {
                         </div>
 
                         <div className="row">
-                            <div className="col-md">
+                            <div className="col-sm">
                                 <SquaredInput
                                     isPassword="true"
                                     type={newPasswordType}
@@ -265,7 +265,7 @@ class Profile extends Component {
                                     handleChange={this.handleChange}
                                 />
                             </div>
-                            <div className="col-md">
+                            <div className="col-sm">
                                 <SquaredInput
                                     isPassword="true"
                                     type={confirmPasswordType}
