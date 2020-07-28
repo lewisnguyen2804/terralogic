@@ -9,7 +9,7 @@
 
 // HR
 hr {
-    margin: 0!important;
+    margin: 0 !important;
 }
 
 // AREA
@@ -34,8 +34,8 @@ hr {
         max-width: 200px;
     }
     .button-disable {
-        pointer-events:none;
-        opacity:0.5;
+        pointer-events: none;
+        opacity: 0.7;
     }
     .button-enable {
         pointer-events: auto;

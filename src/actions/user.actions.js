@@ -104,15 +104,23 @@ let register = (userRegister) => {
 }
 
 let uploadImage = (formData, token) => {
+    let success = (link) => {
+        return {
+            type: userConstants.IMAGE_UPLOADED,
+            link
+        }
+    }
     return dispatch => {
         userService.uploadImage(formData, token)
         .then(
-            user => {
-                if (user.status === 0) {
-                    dispatch(alertActions.error(user.msg));
+            value => {
+                if (value.status === 0) {
+                    dispatch(alertActions.error(value.msg));
                 }
-                else if (user.status === 1) {
-                    dispatch(alertActions.success(user.msg));
+                else if (value.status === 1) {
+                    dispatch(alertActions.success(value.msg));
+                    // return link
+                    dispatch(success(value.data));
                 }
             }
         )
@@ -123,12 +131,12 @@ let updateInformation = (data, token) => {
     return dispatch => {
         userService.updateInformation(data, token)
         .then(
-            user => {
-                if (user.status === 0) {
-                    dispatch(alertActions.error(user.msg));
+            value => {
+                if (value.status === 0) {
+                    dispatch(alertActions.error(value.msg));
                 }
-                else if (user.status === 1) {
-                    dispatch(alertActions.success(user.msg));
+                else if (value.status === 1) {
+                    dispatch(alertActions.success(value.msg));
                 }
             }
         )
@@ -139,12 +147,12 @@ let changePassword = (data, token) => {
     return dispatch => {
         userService.changePassword(data, token)
         .then(
-            user => {
-                if (user.status === 0) {
-                    dispatch(alertActions.error(user.msg));
+            value => {
+                if (value.status === 0) {
+                    dispatch(alertActions.error(value.msg));
                 }
-                else if (user.status === 1) {
-                    dispatch(alertActions.success(user.msg));
+                else if (value.status === 1) {
+                    dispatch(alertActions.success(value.msg));
                 }
             }
         )

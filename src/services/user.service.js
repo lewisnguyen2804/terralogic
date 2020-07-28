@@ -142,18 +142,17 @@ let uploadImage = async (formData, token) => {
     var options = {
         'method': 'POST',
         'headers': {
-            'Content-Type': 'multipart/form-data',
             'Authorization': authorizationCode,
-            'Access-Control-Allow-Origin': '*'
         },
         body: formData
     };
 
     try {
-        console.log("options: ", options.body); 
-        console.log("uploading"); //
         let fetchResponse = await fetch(`${apiUrl}/upload`, options);
-        console.log("done"); //
+        let data = await fetchResponse.json();
+        console.log("update picture: ", data)
+        localStorage.setItem('userImage', JSON.stringify(data));
+        return data
     } catch (e) {
         console.log("error: " + e);
     }
@@ -172,10 +171,9 @@ let updateInformation = async (data, token) => {
     };
 
     try {
-        console.log("updating Information"); //
         let fetchResponse = await fetch(`${apiUrl}/update`, options);
         let data = await fetchResponse.json();
-        console.log("update: ", data)
+        console.log("update information: ", data)
         return data
     } catch (e) {
         console.log("error: " + e);
@@ -196,7 +194,7 @@ let changePassword = async (data, token) => {
     };
 
     try {
-        console.log("updating"); //
+        console.log("updating password"); //
         let fetchResponse = await fetch(`${apiUrl}/changePassword`, options);
         let data = await fetchResponse.json();
         return data

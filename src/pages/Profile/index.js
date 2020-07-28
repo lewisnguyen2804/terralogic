@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 
-import Avatar from '../../assets/images/img_avatar.png'
 import ShowPasswordIcon from '../../assets/images/Suche03.svg';
 
 import PageTitle from '../../components/PageTitle';
@@ -19,6 +18,7 @@ class Profile extends Component {
             fullName: '',
             email: '',
             phone: '',
+            userImage: '',
             currentPwd: '',
             newPwd: '',
             confirmPwd: '',
@@ -36,10 +36,15 @@ class Profile extends Component {
     }
 
     componentDidMount = () => {
+        // user decoded
         let userLogged = localStorage.getItem('userLogged');
         let userLoggedObj = JSON.parse(userLogged);
+        // user with token
         let user = localStorage.getItem('user');
         let userObj = JSON.parse(user);
+        // user with token
+        let userImage = localStorage.getItem('userImage');
+        let userImageObj = JSON.parse(userImage);
 
         try {
             this.setState({
@@ -48,13 +53,14 @@ class Profile extends Component {
                 fullName: userLoggedObj.name,
                 email: userLoggedObj.email,
                 phone: userLoggedObj.phone,
+                userImage: userImageObj.data
             })
         } catch (e) {
             console.log("error get profile: " + e);
         }
     }
 
-    // UPDATE LOCAL STORAGE
+    // UPDATE LOCAL STORAGE ON VALUE CHANGES
     updateLocalStorage = () => {
         let value = JSON.parse(localStorage.getItem('userLogged'));
         let newUser = {}
@@ -64,11 +70,19 @@ class Profile extends Component {
                 email: this.state.email,
                 name: this.state.fullName,
                 phone: this.state.phone,
-                displayName: this.state.fullName,
+                displayName: this.state.fullName
             }
         }
-        console.log("new user: ", newUser)
         localStorage.setItem('userLogged', JSON.stringify(newUser));
+    }
+
+    updateImageLocalStorage = () => {
+        let value = JSON.parse(localStorage.getItem('userImage'));
+        let newImage = {
+                ...value,
+                data: this.props.link
+            }
+        localStorage.setItem('userImage', JSON.stringify(newImage))
     }
 
     // UPLOAD FILES/IMAGES
@@ -76,13 +90,14 @@ class Profile extends Component {
         this.refs.fileUploader.click();
     }
 
-    onFileChange = (event) => {
-        let file = event.target.files[0];
+    onFileChange = async (event) => {
+        const file = event.target.files[0];
+
         if (file) {
-            let formData = new FormData();
-            formData.append('file', file);
-            console.log("token: ", this.state.user.token)
-            this.props.uploadImage(formData, this.state.user.token)
+            const dataForm = new FormData();
+            dataForm.append("username", file);
+            this.props.uploadImage(dataForm, this.state.user.token);
+            this.updateAvatar();
         }
     };
 
@@ -107,6 +122,15 @@ class Profile extends Component {
         this.updateLocalStorage()
     }
 
+    // UPDATE AVATAR
+    updateAvatar = () => {
+        const data = {
+            avatar: this.props.link
+        }
+        this.props.updateInformation(data, this.state.user.token)
+        this.updateImageLocalStorage()
+    }
+
     // CHANGE PASSWORD
     changePassword = () => {
         const data = {
@@ -116,7 +140,7 @@ class Profile extends Component {
         this.props.changePassword(data, this.state.user.token)
     }
 
-    
+
     // HANDLE INPUTS
     handleChange = (event) => {
         this.setState({
@@ -129,7 +153,7 @@ class Profile extends Component {
         if ((this.state.fullName !== this.state.userLogged.name)
             || (this.state.email !== this.state.userLogged.email)
             || (this.state.phone !== this.state.userLogged.phone)) {
-                isUpdatingInformation = true
+            isUpdatingInformation = true
         }
         else {
             isUpdatingInformation = false
@@ -137,7 +161,7 @@ class Profile extends Component {
         if ((this.state.currentPwd !== '')
             || (this.state.newPwd !== '')
             || (this.state.confirmPwd !== '')) {
-                isChangingPassword = true
+            isChangingPassword = true
         }
         else {
             isChangingPassword = false
@@ -168,7 +192,10 @@ class Profile extends Component {
         const currentPasswordType = this.state.showCurrentPwd ? "text" : "password";
         const newPasswordType = this.state.showNewPwd ? "text" : "password";
         const confirmPasswordType = this.state.showConfirmPwd ? "text" : "password";
+
         const isChangingInformation = (this.state.isChangingPassword || this.state.isUpdatingInformation) ? "button-type-1 button-enable" : "button-type-1 button-disable";
+        // user image
+        const userImage = (this.props.link !== undefined) ? `http://api.terralogic.ngrok.io/${this.props.link}` : `http://api.terralogic.ngrok.io/${this.state.userImage}`;
 
         return (
             <div>
@@ -178,7 +205,7 @@ class Profile extends Component {
 
                 <div className="container">
                     <UserCard
-                        image={Avatar}
+                        image={userImage}
                         name={this.state.fullName}
                         handleClick={this.handleUploadClick}
                     />
@@ -295,12 +322,8 @@ class Profile extends Component {
 }
 
 let mapStateToProps = (state) => {
-    // const { logged, authentication } = state;
-    // const { user } = authentication;
-    // const { userLogged } = logged;
-
-    // return { user, userLogged };
-    return {}
+    const { link } = state.uploadImage;
+    return { link };
 }
 
 let mapDispatchToProps = (dispatch) => {
@@ -308,7 +331,7 @@ let mapDispatchToProps = (dispatch) => {
         logout: userActions.logout,
         uploadImage: userActions.uploadImage,
         updateInformation: userActions.updateInformation,
-        changePassword: userActions.changePassword
+        changePassword: userActions.changePassword,
     }, dispatch)
 }
 
