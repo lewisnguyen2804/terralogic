@@ -108,7 +108,7 @@ let validationProfileInfo = (data) => {
     let isError = false;
     let msg = '';
     if (validator.isEmpty(data.email) || validator.isEmpty(data.name) || validator.isEmpty(data.phone)) {
-        msg = 'Please fill your information to register';
+        msg = 'Please fill your information';
         isError = true;
     }
     else if (!validateEmail(data.email)) {
