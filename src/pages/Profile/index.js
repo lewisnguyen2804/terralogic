@@ -177,122 +177,124 @@ class Profile extends Component {
         const userImage = (this.props.link !== undefined) ? `http://api.terralogic.ngrok.io/${this.props.link}` : `http://api.terralogic.ngrok.io/${this.state.userImage}`;
 
         return (
-            <div>
-                <PageTitle
-                    title="My Profile"
-                    description="Manage your profile and contact information." />
+            <div className="container">
+                <div className="profile-container m-5">
+                    <PageTitle
+                        title="My Profile"
+                        description="Manage your profile and contact information." />
 
-                <div className="container">
-                    <UserCard
-                        image={userImage}
-                        name={this.state.fullName}
-                        handleClick={this.handleUploadClick}
-                    />
+                    <div className="container">
+                        <UserCard
+                            image={userImage}
+                            name={this.state.fullName}
+                            handleClick={this.handleUploadClick}
+                        />
 
-                    {/* UPLOAD IMAGE */}
-                    <input type="file"
-                        ref="fileUploader"
-                        onChange={this.onFileChange}
-                        style={{ display: "none" }} />
+                        {/* UPLOAD IMAGE */}
+                        <input type="file"
+                            ref="fileUploader"
+                            onChange={this.onFileChange}
+                            style={{ display: "none" }} />
 
-                    <div className="contact-information">
-                        <div className="row">
-                            <div className="col-sm-6">
-                                <SquaredInput
-                                    type="text"
-                                    title="Full Name"
-                                    value={this.state.fullName}
-                                    name="fullName"
-                                    handleChange={this.handleChange}
-                                />
+                        <div className="contact-information">
+                            <div className="row">
+                                <div className="col-sm-6">
+                                    <SquaredInput
+                                        type="text"
+                                        title="Full Name"
+                                        value={this.state.fullName}
+                                        name="fullName"
+                                        handleChange={this.handleChange}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-sm">
+                                    <SquaredInput
+                                        type="text"
+                                        title="Email"
+                                        value={this.state.email}
+                                        name="email"
+                                        handleChange={this.handleChange}
+                                    />
+                                </div>
+                                <div className="col-sm">
+                                    <SquaredInput
+                                        type="text"
+                                        title="Phone"
+                                        value={this.state.phone}
+                                        name="phone"
+                                        handleChange={this.handleChange}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <p className="change-pwd-label">Change password</p>
+
+                        <div className="password-change">
+                            <div className="row">
+                                <div className="col-sm-6">
+                                    <SquaredInput
+                                        isPassword="true"
+                                        type={currentPasswordType}
+                                        title="Current password"
+                                        name="currentPwd"
+                                        value={this.state.currentPwd}
+                                        imgSrc={ShowPasswordIcon}
+                                        imgAlt="pwd-icon"
+                                        imgClassName="show-hide-pwd-icon"
+                                        onShowPasswordClick={this.onShowCurrentPasswordClick}
+                                        handleChange={this.handleChange}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-sm">
+                                    <SquaredInput
+                                        isPassword="true"
+                                        type={newPasswordType}
+                                        title="New password"
+                                        name="newPwd"
+                                        value={this.state.newPwd}
+                                        imgSrc={ShowPasswordIcon}
+                                        imgAlt="pwd-icon"
+                                        imgClassName="show-hide-pwd-icon"
+                                        onShowPasswordClick={this.onShowNewPasswordClick}
+                                        handleChange={this.handleChange}
+                                    />
+                                </div>
+                                <div className="col-sm">
+                                    <SquaredInput
+                                        isPassword="true"
+                                        type={confirmPasswordType}
+                                        title="Confirm password"
+                                        name="confirmPwd"
+                                        value={this.state.confirmPwd}
+                                        imgSrc={ShowPasswordIcon}
+                                        imgAlt="pwd-icon"
+                                        imgClassName="show-hide-pwd-icon"
+                                        onShowPasswordClick={this.onShowConfirmPasswordClick}
+                                        handleChange={this.handleChange}
+                                    />
+                                </div>
                             </div>
                         </div>
 
-                        <div className="row">
-                            <div className="col-sm">
-                                <SquaredInput
-                                    type="text"
-                                    title="Email"
-                                    value={this.state.email}
-                                    name="email"
-                                    handleChange={this.handleChange}
-                                />
-                            </div>
-                            <div className="col-sm">
-                                <SquaredInput
-                                    type="text"
-                                    title="Phone"
-                                    value={this.state.phone}
-                                    name="phone"
-                                    handleChange={this.handleChange}
-                                />
-                            </div>
+                        <div className="save-logout">
+                            <CustomButton
+                                type="button"
+                                className={isChangingInformation}
+                                onClick={this.editProfile}
+                                value="Save" />
+                            <CustomButton
+                                type="button"
+                                className="button-type-2"
+                                onClick={this.onLogOutClick}
+                                value="Logout" />
                         </div>
-                    </div>
-                    <hr />
-                    <p className="change-pwd-label">Change password</p>
-
-                    <div className="password-change">
-                        <div className="row">
-                            <div className="col-sm-6">
-                                <SquaredInput
-                                    isPassword="true"
-                                    type={currentPasswordType}
-                                    title="Current password"
-                                    name="currentPwd"
-                                    value={this.state.currentPwd}
-                                    imgSrc={ShowPasswordIcon}
-                                    imgAlt="pwd-icon"
-                                    imgClassName="show-hide-pwd-icon"
-                                    onShowPasswordClick={this.onShowCurrentPasswordClick}
-                                    handleChange={this.handleChange}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-sm">
-                                <SquaredInput
-                                    isPassword="true"
-                                    type={newPasswordType}
-                                    title="New password"
-                                    name="newPwd"
-                                    value={this.state.newPwd}
-                                    imgSrc={ShowPasswordIcon}
-                                    imgAlt="pwd-icon"
-                                    imgClassName="show-hide-pwd-icon"
-                                    onShowPasswordClick={this.onShowNewPasswordClick}
-                                    handleChange={this.handleChange}
-                                />
-                            </div>
-                            <div className="col-sm">
-                                <SquaredInput
-                                    isPassword="true"
-                                    type={confirmPasswordType}
-                                    title="Confirm password"
-                                    name="confirmPwd"
-                                    value={this.state.confirmPwd}
-                                    imgSrc={ShowPasswordIcon}
-                                    imgAlt="pwd-icon"
-                                    imgClassName="show-hide-pwd-icon"
-                                    onShowPasswordClick={this.onShowConfirmPasswordClick}
-                                    handleChange={this.handleChange}
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="save-logout">
-                        <CustomButton
-                            type="button"
-                            className={isChangingInformation}
-                            onClick={this.editProfile}
-                            value="Save" />
-                        <CustomButton
-                            type="button"
-                            className="button-type-2"
-                            onClick={this.onLogOutClick}
-                            value="Logout" />
                     </div>
                 </div>
             </div>

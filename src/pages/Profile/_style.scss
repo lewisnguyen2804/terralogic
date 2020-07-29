@@ -1,3 +1,10 @@
+// PROFILE CONTAINER
+.profile-container {
+    border-radius: 4px;
+    box-shadow: 0 30px 50px 0 rgba(26, 25, 62, 0.2);
+}
+
+
 // LABEL
 .change-pwd-label {
     color: $second-color;
@@ -19,6 +26,7 @@ hr {
         top: 17px;
         bottom: 40px;
     }
+    padding-bottom: 34px;
 }
 
 .save-logout {
