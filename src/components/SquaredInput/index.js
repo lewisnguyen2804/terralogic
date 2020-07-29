@@ -6,7 +6,6 @@ export default class SquaredInput extends Component {
             <div className="input-group">
                 <label>{this.props.title}</label>
                 <input
-                    autoComplete="off"
                     type={this.props.type}
                     value={this.props.value}
                     onChange={this.props.handleChange}
@@ -18,9 +17,7 @@ export default class SquaredInput extends Component {
                         alt={this.props.imgAlt}
                         onClick={this.props.onShowPasswordClick} />
                     : ''}
-
             </div>
-
         )
     }
 }

@@ -139,22 +139,32 @@ class RegisterForm extends Component {
                             className="button-type-2"
                             onClick={this.goBack}
                             value="Back" />
-                        <CustomButton
-                            type="submit"
-                            className="button-type-1"
-                            value="Submit" />
+                        {this.props.registering &&
+                            <CustomButton
+                                type="submit"
+                                className="button-type-1"
+                                value="Submiting..." />
+                        }
+                        {!this.props.registering &&
+                            <CustomButton
+                                type="submit"
+                                className="button-type-1"
+                                value="Submit" />}
                     </div>
+
                 </form>
             </div>
         )
     }
 }
 
-function mapStateToProps(state) {
-    return {}
+const mapStateToProps = (state) => {
+    const { registering } = state.registration;
+    return { registering };
 }
 
-function mapDispatchToProps(dispatch) {
+
+const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         register: userActions.register
     }, dispatch)

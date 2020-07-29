@@ -180,7 +180,7 @@ class Profile extends Component {
         return (
             <div className="container">
                 <div className="container-fuild profile-container mt-5 mb-5">
-                    
+
                     <div className="header">
                         <div className="container header-text pl-5 pr-5">
                             <h2>My Profile</h2>
@@ -289,11 +289,21 @@ class Profile extends Component {
                         </div>
 
                         <div className="save-logout">
-                            <CustomButton
-                                type="button"
-                                className={isChangingInformation}
-                                onClick={this.editProfile}
-                                value="Save" />
+                            {this.props.updating &&
+                                <CustomButton
+                                    type="button"
+                                    className={isChangingInformation}
+                                    onClick={this.editProfile}
+                                    value="Saving..." />
+                            }
+                            {!this.props.updating &&
+                                <CustomButton
+                                    type="button"
+                                    className={isChangingInformation}
+                                    onClick={this.editProfile}
+                                    value="Save" />
+                            }
+
                             <CustomButton
                                 type="button"
                                 className="button-type-2"
@@ -309,7 +319,8 @@ class Profile extends Component {
 
 let mapStateToProps = (state) => {
     const { link } = state.uploadImage;
-    return { link };
+    const { updating } = state.update;
+    return { link, updating };
 }
 
 let mapDispatchToProps = (dispatch) => {

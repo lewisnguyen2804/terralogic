@@ -61,7 +61,6 @@ let logout = () => {
             type: userConstants.LOGOUT
         };
     }
-   
 }
 
 let register = (userRegister) => {
@@ -128,14 +127,32 @@ let uploadImage = (formData, token) => {
 }
 
 let updateInformation = (data, token) => {
+    let request = () => {
+        return {
+            type: userConstants.UPDATE_REQUEST
+        }
+    }
+    let success = () => {
+        return {
+            type: userConstants.UPDATE_SUCCESS
+        }
+    }
+    let failure = () => {
+        return {
+            type: userConstants.UPDATE_FAILURE
+        }
+    }
     return dispatch => {
+        dispatch(request())
         userService.updateInformation(data, token)
         .then(
             value => {
                 if (value.status === 0) {
+                    dispatch(failure())
                     dispatch(alertActions.error(value.msg));
                 }
                 else if (value.status === 1) {
+                    dispatch(success())
                     dispatch(alertActions.success(value.msg));
                 }
             }
@@ -144,14 +161,32 @@ let updateInformation = (data, token) => {
 }
 
 let changePassword = (data, token) => {
+    let request = () => {
+        return {
+            type: userConstants.UPDATE_REQUEST
+        }
+    }
+    let success = () => {
+        return {
+            type: userConstants.UPDATE_SUCCESS
+        }
+    }
+    let failure = () => {
+        return {
+            type: userConstants.UPDATE_FAILURE
+        }
+    }
     return dispatch => {
+        dispatch(request())
         userService.changePassword(data, token)
         .then(
             value => {
                 if (value.status === 0) {
+                    dispatch(failure())
                     dispatch(alertActions.error(value.msg));
                 }
                 else if (value.status === 1) {
+                    dispatch(success())
                     dispatch(alertActions.success(value.msg));
                 }
             }

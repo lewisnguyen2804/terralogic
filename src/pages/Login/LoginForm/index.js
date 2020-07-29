@@ -41,7 +41,7 @@ class LoginForm extends Component {
         });
     };
 
-    
+
     // SUBMIT FORM
     handleSubmit = async (event) => {
         event.preventDefault();
@@ -98,10 +98,18 @@ class LoginForm extends Component {
                                 className="button-type-2"
                                 value="Register" />
                         </Link>
-                        <CustomButton
-                            type="submit"
-                            className="button-type-1"
-                            value="Login" />
+                        {this.props.loggingIn &&
+                            <CustomButton
+                                type="submit"
+                                className="button-type-1"
+                                value="Logging in..." />
+                        }
+                        {!this.props.loggingIn &&
+                            <CustomButton
+                                type="submit"
+                                className="button-type-1"
+                                value="Login" />}
+
                     </div>
 
                     <CustomCheckBox
@@ -109,17 +117,20 @@ class LoginForm extends Component {
                         name="remember-pwd"
                         onChange={this.rememberPasswordOnChange}
                     />
+
+
                 </form>
             </div>
         )
     }
 }
 
-function mapStateToProps(state) {
-    return {}
+const mapStateToProps = (state) => {
+    const { loggingIn } = state.authentication;
+    return { loggingIn };
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         login: userActions.login
     }, dispatch)
