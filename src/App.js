@@ -19,10 +19,11 @@ import { connect } from 'react-redux';
 class App extends Component {
 	render() {
 		const { alert } = this.props;
+		const alertType = alert.type === 'alert-success' ? 'bg-success':'bg-danger';
 		return (
 			<div>
 				{alert.message &&
-					<div className="text-center bg-danger text-white p-2 fixed-top">
+					<div className={`text-center text-white p-2 fixed-top ${alertType}`}>
 						{alert.message}
 					</div>
 				}

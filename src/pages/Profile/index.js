@@ -96,6 +96,7 @@ class Profile extends Component {
         if (this.state.isChangingPassword === true) {
             this.changePassword();
         }
+        this.setState({ isChangingPassword: false, isUpdatingInformation: false })
     }
 
     // UPDATE INFORMATION
