@@ -1,25 +1,53 @@
 import apiUrl from './config';
 import * as JWT from 'jwt-decode';
+import validator from 'validator';
 
 // VALIDATE EMAIL
 let validateEmail = (email) => {
-    const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
-    return expression.test(String(email).toLowerCase())
+    const isValidEmail = validator.isEmail(email)
+    return (isValidEmail)
+}
+
+// VALIDATE PHONE NUMBER
+let validatePhoneNumber = (number) => {
+    const regexp = /^\d{10,11}$/;
+    const checkingResult = regexp.exec(number);
+    if (checkingResult !== null) {
+        return true
+    }
+    else return false
+}
+
+// VALIDATE NAME
+let validateName = (name) => {
+    const regexp = /^[A-Za-z\s]+$/;
+    const checkingResult = regexp.exec(name);
+    if (checkingResult !== null) {
+        return true
+    }
+    return false
+}
+
+// VALIDATE PASSWORD
+let validatePassword = (password) => {
+    var decimal = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,30}$/;
+    if (password.match(decimal)) return true
+    else return false
 }
 
 // VALIDATION LOGIN FORM
 let validationLogin = (user) => {
     let isError = false;
     let msg = '';
-    if (user.email === '' && user.password === '') {
+    if (validator.isEmpty(user.email) && validator.isEmpty(user.password)) {
         msg = 'Please type your email and password to login';
         isError = true;
     }
-    else if (user.email === '' && user.password !== '') {
+    else if (validator.isEmpty(user.email) && !validator.isEmpty(user.password)) {
         msg = 'Please type your email';
         isError = true;
     }
-    else if (user.email !== '' && user.password === '') {
+    else if (!validator.isEmpty(user.email) && validator.isEmpty(user.password)) {
         msg = 'Please type your password';
         isError = true;
     }
@@ -41,7 +69,7 @@ let validationLogin = (user) => {
 let validationRegister = (user) => {
     let isError = false;
     let msg = '';
-    if (user.email === '' || user.password === '' || user.name === '' || user.phone === '') {
+    if (validator.isEmpty(user.email) || validator.isEmpty(user.password) || validator.isEmpty(user.confirmPassword) || validator.isEmpty(user.name) || validator.isEmpty(user.phone)) {
         msg = 'Please fill your information to register';
         isError = true;
     }
@@ -53,8 +81,20 @@ let validationRegister = (user) => {
         msg = 'Password must be at least 8 characters';
         isError = true;
     }
+    else if (!validatePassword(user.password)) {
+        msg = 'Password must contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character';
+        isError = true;
+    }
     else if (user.confirmPassword !== user.password) {
         msg = 'Passwords are not match';
+        isError = true;
+    }
+    else if (!validateName(user.name)) {
+        msg = 'Invalid name';
+        isError = true;
+    }
+    else if (!validatePhoneNumber(user.phone)) {
+        msg = 'Invalid phone number';
         isError = true;
     }
     if (isError) {
@@ -63,6 +103,80 @@ let validationRegister = (user) => {
     else return { msg: "OK", status: 1 }
 }
 
+// VALIDATE PROFILE FORM
+let validationProfileInfo = (data) => {
+    let isError = false;
+    let msg = '';
+    if (validator.isEmpty(data.email) || validator.isEmpty(data.name) || validator.isEmpty(data.phone)) {
+        msg = 'Please fill your information to register';
+        isError = true;
+    }
+    else if (!validateEmail(data.email)) {
+        msg = `"${data.email}" is not an email`;
+        isError = true;
+    }
+    else if (!validateName(data.name)) {
+        msg = 'Invalid name';
+        isError = true;
+    }
+    else if (!validatePhoneNumber(data.phone)) {
+        msg = 'Invalid phone number';
+        isError = true;
+    }
+    if (isError) {
+        return { msg: msg, status: 0 }
+    }
+    else return { msg: "OK", status: 1 }
+}
+
+
+// VALIDATE PROFILE FORM
+let validationChangePassword = (data) => {
+    let isError = false;
+    let msg = '';
+    if (validator.isEmpty(data.currentPassword) || validator.isEmpty(data.newPassword) || validator.isEmpty(data.confirmPassword)) {
+        msg = 'Please fill your password fields';
+        isError = true;
+    }
+    else if (data.newPassword.length < 8) {
+        msg = 'Password must be at least 8 characters';
+        isError = true;
+    }
+    else if (!validatePassword(data.newPassword)) {
+        msg = 'Password must contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character';
+        isError = true;
+    }
+    else if (data.newPassword !== data.confirmPassword) {
+        msg = 'The new password and confirm password are not match';
+        isError = true;
+    }
+    if (isError) {
+        return { msg: msg, status: 0 }
+    }
+    else return { msg: "OK", status: 1 }
+}
+
+// VALIDATION FORM DATA UPLOAD IMAGE
+let validationImage = (formData) => {
+    let isError = false;
+    let msg = '';
+    let fileName = '';
+    for (var pair of formData.entries()) {
+        fileName = pair[1].name
+    }
+
+    const regexp = /[^/]+(jpg|png|jpeg|gif)$/;
+    const checkingResult = fileName.match(regexp);
+    if (checkingResult === null) {
+        msg = "File format is not an image"
+        isError = true;
+    }
+
+    if (isError) {
+        return { msg: msg, status: 0 }
+    }
+    else return { msg: "OK", status: 1 }
+}
 
 // LOGIN
 let login = async (user) => {
@@ -138,77 +252,94 @@ let getProfile = (userLoggedIn) => {
 }
 
 let uploadImage = async (formData, token) => {
-    let authorizationCode = `Bearer ${token}`;
-    var options = {
-        'method': 'POST',
-        'headers': {
-            'Authorization': authorizationCode,
-        },
-        body: formData
-    };
+    if (validationImage(formData).status === 1) {
+        let authorizationCode = `Bearer ${token}`;
+        var options = {
+            'method': 'POST',
+            'headers': {
+                'Authorization': authorizationCode,
+            },
+            body: formData
+        };
 
-    try {
-        let fetchResponse = await fetch(`${apiUrl}/upload`, options);
-        let data = await fetchResponse.json();
-        console.log("update picture: ", data)
-        // localStorage.setItem('userImage', JSON.stringify(data));
+        try {
+            let fetchResponse = await fetch(`${apiUrl}/upload`, options);
+            let data = await fetchResponse.json();
+            console.log("update picture: ", data)
+            // localStorage.setItem('userImage', JSON.stringify(data));
 
-        // update avatar on user logged
-        let value = JSON.parse(localStorage.getItem('userLogged'));
-        let newImage = {
-            ...value,
-            avatar: data.data
+            // update avatar on user logged
+            let value = JSON.parse(localStorage.getItem('userLogged'));
+            let newImage = {
+                ...value,
+                avatar: data.data
+            }
+            localStorage.setItem('userLogged', JSON.stringify(newImage));
+
+            return data
+        } catch (e) {
+            console.log("error: " + e);
         }
-        localStorage.setItem('userLogged', JSON.stringify(newImage));
-
-        return data
-    } catch (e) {
-        console.log("error: " + e);
     }
+    else return validationImage(formData)
 }
 
 let updateInformation = async (data, token) => {
-    let authorizationCode = `Bearer ${token}`;
-    var options = {
-        'method': 'PATCH',
-        'headers': {
-            'Content-Type': 'application/json',
-            'Authorization': authorizationCode,
-            'Access-Control-Allow-Origin': '*'
-        },
-        body: JSON.stringify(data)
-    };
-
-    try {
-        let fetchResponse = await fetch(`${apiUrl}/update`, options);
-        let data = await fetchResponse.json();
-        console.log("update information: ", data)
-        return data
-    } catch (e) {
-        console.log("error: " + e);
+    if (validationProfileInfo(data).status === 1) {
+        let authorizationCode = `Bearer ${token}`;
+        var options = {
+            'method': 'PATCH',
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': authorizationCode,
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify(data)
+        };
+    
+        try {
+            let fetchResponse = await fetch(`${apiUrl}/update`, options);
+            let data = await fetchResponse.json();
+            console.log("update information: ", data)
+            return data
+        } catch (e) {
+            console.log("error: " + e);
+        }
+    }
+    else {
+        return validationProfileInfo(data)
     }
 }
 
 
 let changePassword = async (data, token) => {
-    let authorizationCode = `Bearer ${token}`;
-    var options = {
-        'method': 'POST',
-        'headers': {
-            'Content-Type': 'application/json',
-            'Authorization': authorizationCode,
-            'Access-Control-Allow-Origin': '*'
-        },
-        body: JSON.stringify(data)
-    };
+    if (validationChangePassword(data).status === 1) {
+        let passPack = {
+            "password": data.newPassword,
+            "currentPassword": data.currentPassword
+        }
+        let authorizationCode = `Bearer ${token}`;
+        var options = {
+            'method': 'POST',
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': authorizationCode,
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify(passPack)
+        };
 
-    try {
-        console.log("updating password"); //
-        let fetchResponse = await fetch(`${apiUrl}/changePassword`, options);
-        let data = await fetchResponse.json();
-        return data
-    } catch (e) {
-        console.log("error: " + e);
+        try {
+            console.log("updating password"); //
+            let fetchResponse = await fetch(`${apiUrl}/changePassword`, options);
+            let data = await fetchResponse.json();
+            return data
+        } catch (e) {
+            console.log("error: " + e);
+        }
+    }
+    else {
+        return validationChangePassword(data)
     }
 }
 

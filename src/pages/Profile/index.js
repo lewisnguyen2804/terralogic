@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 
 import ShowPasswordIcon from '../../assets/images/Suche03.svg';
 
-import PageTitle from '../../components/PageTitle';
 import UserCard from './UserCard';
 import SquaredInput from '../../components/SquaredInput';
 import CustomButton from '../../components/CustomButton';
@@ -73,7 +72,7 @@ class Profile extends Component {
         localStorage.setItem('userLogged', JSON.stringify(newUser));
     }
 
-    
+
     // UPLOAD FILES/IMAGES
     handleUploadClick = (event) => {
         this.refs.fileUploader.click();
@@ -84,7 +83,7 @@ class Profile extends Component {
 
         if (file) {
             const dataForm = new FormData();
-            dataForm.append("username", file);
+            dataForm.append("file", file);
             this.props.uploadImage(dataForm, this.state.user.token)
         }
     };
@@ -113,8 +112,9 @@ class Profile extends Component {
     // CHANGE PASSWORD
     changePassword = () => {
         const data = {
-            "password": this.state.newPwd,
-            "currentPassword": this.state.currentPwd
+            "currentPassword": this.state.currentPwd,
+            "newPassword": this.state.newPwd,
+            "confirmPassword": this.state.confirmPwd,
         }
         this.props.changePassword(data, this.state.user.token)
     }
@@ -178,12 +178,16 @@ class Profile extends Component {
 
         return (
             <div className="container">
-                <div className="profile-container m-5">
-                    <PageTitle
-                        title="My Profile"
-                        description="Manage your profile and contact information." />
+                <div className="container-fuild profile-container mt-5 mb-5">
+                    
+                    <div className="header">
+                        <div className="container header-text pl-5 pr-5">
+                            <h2>My Profile</h2>
+                            <p>Manage your profile and contact information.</p>
+                        </div>
+                    </div>
 
-                    <div className="container">
+                    <div className="container pl-5 pr-5">
                         <UserCard
                             image={userImage}
                             name={this.state.fullName}
