@@ -182,13 +182,13 @@ class Profile extends Component {
                 <div className="container-fuild profile-container mt-5 mb-5">
 
                     <div className="header">
-                        <div className="container header-text pl-5 pr-5">
+                        <div className="container header-text pl-sm-2 pr-sm-2 pl-md-5 pr-md-5">
                             <h2>My Profile</h2>
                             <p>Manage your profile and contact information.</p>
                         </div>
                     </div>
 
-                    <div className="container pl-5 pr-5">
+                    <div className="container pl-sm-2 pr-sm-2 pl-md-5 pr-md-5">
                         <UserCard
                             image={userImage}
                             name={this.state.fullName}
