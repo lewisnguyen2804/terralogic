@@ -1,0 +1,22 @@
+@import './mixins';
+@import './variables';
+
+// components
+@import '../components/CompanyImage/_style.scss';
+@import '../components/CompanyLogo/_style.scss';
+@import '../components/CustomButton/_style.scss';
+@import '../components/CustomCheckBox/_style.scss';
+@import '../components/RoundedInput/_style.scss';
+@import '../components/SquaredInput/_style.scss';
+
+// pages
+@import '../pages/Login/_style.scss';
+@import '../pages/Login/LoginForm/_style.scss';
+
+@import '../pages/Register/_style.scss';
+@import '../pages/Register/RegisterForm/_style.scss';
+
+@import '../pages/Profile/_style.scss';
+@import '../pages/Profile/UserCard/_style.scss';
+@import '../pages/Register/style.scss';
+

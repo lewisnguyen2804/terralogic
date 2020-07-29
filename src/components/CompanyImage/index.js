@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './style.scss'
 import CoImage from '../../assets/images/solution-experts.png'
 
 

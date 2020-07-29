@@ -1,0 +1,71 @@
+// PROFILE CONTAINER
+.profile-container {
+    border-radius: 4px;
+    box-shadow: 0 30px 50px 0 rgba(26, 25, 62, 0.2);
+}
+
+// HEADER
+.header {
+    background-color: $main-color;
+    border-radius: 4px;
+    .header-text {
+        padding: {
+            top: 20px;
+            bottom: 10px;
+        }
+        h2 {
+            color: white;
+            @extend .bold-font;
+        }
+        p {
+            color: $second-color;
+        }
+    }
+}
+
+
+// LABEL
+.change-pwd-label {
+    color: $second-color;
+    margin: {
+        bottom: 24px;
+        top: 24px;
+    }
+}
+
+// HR
+hr {
+    margin: 0 !important;
+}
+
+// AREA
+.save-logout {
+    display: flex;
+    margin: {
+        top: 17px;
+        bottom: 40px;
+    }
+    padding-bottom: 34px;
+}
+
+.save-logout {
+    .button-type-1 {
+        height: 60px;
+        margin-right: 20px;
+        width: 100%;
+        max-width: 200px;
+    }
+    .button-type-2 {
+        height: 60px;
+        width: 100%;
+        max-width: 200px;
+    }
+    .button-disable {
+        pointer-events: none;
+        opacity: 0.7;
+    }
+    .button-enable {
+        pointer-events: auto;
+        opacity: 1;
+    }
+}

@@ -1,24 +1,42 @@
 html {
-  font-size: 14px;
-  margin: 0;
-  padding: 0;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-  font-family: 'Proxima'!important;
+	font-family: "Proxima" !important;
 }
 
 @font-face {
-  font-family: 'Proxima';
-  src: local('Proxima'), url(./fonts/ProximaNova-Regular.otf) format('woff');
+	font-family: "Proxima";
+	src: local("Proxima"), url(./fonts/ProximaNova-Regular.otf) format("woff");
 }
 
 @font-face {
-  font-family: 'Proxima Bold';
-  src: local('Proxima Bold'), url(./fonts/Proxima\ Nova\ Bold.otf) format('woff');
+	font-family: "Proxima Bold";
+	src: local("Proxima Bold"), url(./fonts/Proxima\ Nova\ Bold.otf) format("woff");
 }
 
 @font-face {
-  font-family: 'Proxima Thin';
-  src: local('Proxima Thin'), url(./fonts/Proxima\ Nova\ Thin.otf) format('woff');
+	font-family: "Proxima Thin";
+	src: local("Proxima Thin"), url(./fonts/Proxima\ Nova\ Thin.otf) format("woff");
 }
+
+/* ALERT */
+.alert-in-app {
+	position: relative;
+}
+
+.alert-dissmiss-btn {
+	position: absolute;
+	right: 0;
+	margin-right: 20px;
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+

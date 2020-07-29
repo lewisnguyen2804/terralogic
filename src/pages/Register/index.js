@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import './style.scss'
 import CompanyLogo from '../../components/CompanyLogo'
 import CompanyImage from '../../components/CompanyImage'
-import RegisterForm from './RegisterForm'
+import RegisterFormContainer from './RegisterForm'
 
 export default class Register extends Component {
     render() {
@@ -16,7 +15,7 @@ export default class Register extends Component {
                                     <div className="col-sm-1 col-md-2"></div>
                                     <div className="col-sm col-md">
                                         <CompanyLogo />
-                                        <RegisterForm />
+                                        <RegisterFormContainer />
                                     </div>
                                     <div className="col-sm-1 col-md-2">
                                         {/* Empty col */}

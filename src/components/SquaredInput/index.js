@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './style.scss';
 
 export default class SquaredInput extends Component {
     render() {
@@ -18,9 +17,7 @@ export default class SquaredInput extends Component {
                         alt={this.props.imgAlt}
                         onClick={this.props.onShowPasswordClick} />
                     : ''}
-
             </div>
-
         )
     }
 }
