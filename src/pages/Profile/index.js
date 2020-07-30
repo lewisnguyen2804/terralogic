@@ -10,6 +10,8 @@ import CustomButton from '../../components/CustomButton';
 import { connect } from 'react-redux';
 import { userActions } from '../../actions';
 
+import API from '../../services/config';
+
 class Profile extends Component {
     constructor(props) {
         super(props);
@@ -175,7 +177,7 @@ class Profile extends Component {
 
         const isChangingInformation = (this.state.isChangingPassword || this.state.isUpdatingInformation) ? "button-type-1 button-enable" : "button-type-1 button-disable";
         // user image
-        const userImage = (this.props.link !== undefined) ? `http://api.terralogic.ngrok.io/${this.props.link}` : `http://api.terralogic.ngrok.io/${this.state.userImage}`;
+        const userImage = (this.props.link !== undefined) ? `${API.webUrl}${this.props.link}` : `${API.webUrl}${this.state.userImage}`;
 
         return (
             <div className="container">
