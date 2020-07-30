@@ -1,103 +1,81 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-import validateEmail from '../validateEmail';
-import validateName from '../validateName';
-import validatePassword from '../validatePassword';
-import validatePhoneNumber from '../validatePhoneNumber';
-import validateForms from '../validateForms';
-
+import { userService } from '../user.service';
 
 describe('Test Services', () => {
+    // GET PROFILE
+    // const userLoggedIn = {
+    //     msg: "Login succeeded.",
+    //     token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTmdvYyBUdWFuIiwiZW1haWwiOiJuZ29jdHVhbml0cHlAZ21haWwuY29tIiwicGhvbmUiOiIwMzc0OTg4Mjk3In0.-0ua2Su73pKQIxPMX4HOZ0imEKqUUjmcL1kRweTiJtI',
+    // }
 
-    it('Test validate email', () => {
-        const value = validateEmail('tuan@gmail.com');
-        expect(value).toBe(true);
-    });
+    // it('Test JWT decode', async () => {
+    //     const value = await userService.getProfile(userLoggedIn);
+    //     expect(value).toEqual({
+    //         "name": "Ngoc Tuan",
+    //         "email": "ngoctuanitpy@gmail.com",
+    //         "phone": "0374988297"
+    //     })
+    // });
 
-    it('Test validate password', () => {
-        const value = validatePassword('Abc123!!!');
-        expect(value).toBe(true);
-    });
-
-    it('Test validate name', () => {
-        const value = validateName('Nguyen Van A');
-        expect(value).toBe(true);
-    });
-
-    it('Test validate phone number', () => {
-        const value = validatePhoneNumber('0372988392');
-        expect(value).toBe(true);
-    });
-
-    it('Test validate phone number', () => {
-        const value = validatePhoneNumber('0372988392');
-        expect(value).toBe(true);
-    });
-
-    // LOGIN FORM
-    const loginUser = {
-        email: 'ngoctuanitpy@gmail.com',
-        password: 'Abc123!!!'
+    // LOGIN
+    const userLogin = {
+        email: "ngoctuanitpy@gmail.com",
+        password: "Abc123!!!"
     }
-    it('Test validate login form', () => {
-        const value = validateForms.validationLogin(loginUser);
-        expect(value).toEqual({ "msg": "OK", "status": 1 });
+
+    it('Test login', async () => {
+        // const value = await userService.login(userLogin);
+        // expect(value.status).toEqual(1);
     });
 
-    // REGISTER FORM
-    const registerUser = {
-        email: 'ngoctuanitpy@gmail.com',
+    const userLoginError = {
+        email: "ngoctuanitpy@gmail.com",
+        password: "Abc123!!!ERROR"
+    }
+
+    it('Test login error', async () => {
+        const value = await userService.login(userLoginError);
+        expect(value.status).toEqual(0);
+    });
+
+    // REGISTER
+    const userRegister = {
+        email: 'newemail@gmail.com', 
         password: 'Abc123!!!',
         confirmPassword: 'Abc123!!!',
         name: 'Tuan Nguyen',
         phone: '0392938232'
     }
 
-    it('Test validate register form', () => {
-        const value = validateForms.validationRegister(registerUser);
-        expect(value).toEqual({ "msg": "OK", "status": 1 });
+    it('Test register', async () => {
+        // const value = await userService.register(userRegister);
+        // expect(value.status).toEqual(1);
     });
 
-    // PROFILE FORM
-    const updateInformationUser = {
-        email: 'ngoctuanitpy@gmail.com',
+    const userRegisterError = {
+        email: 'abc@aaaa.com',
+        password: 'Abc!!',
+        confirmPassword: 'Ab!!!',
         name: 'Tuan Nguyen',
         phone: '0392938232'
     }
 
-    it('Test validate update information form', () => {
-        const value = validateForms.validationProfileInfo(updateInformationUser);
-        expect(value).toEqual({ "msg": "OK", "status": 1 });
+    it('Test register error', async () => {
+        // const value = await userService.register(userRegisterError);
+        // expect(value.status).toEqual(0);
     });
 
-    const updatePasswordUser = {
-        currentPassword: 'Abc123!!!',
-        newPassword: 'Edf123!!!',
-        confirmPassword: 'Edf123!!!',
-    }
+    // UPDATE INFORMATION
+    // const updateInformationUser = {
+    //     email: 'hahahahah@gmail.com',
+    //     name: 'Test',
+    //     phone: '0392938232',
+    //     myAvatar: 'nothing here'
+    // }
 
-    it('Test validate update information form', () => {
-        const value = validateForms.validationChangePassword(updatePasswordUser);
-        expect(value).toEqual({ "msg": "OK", "status": 1 });
-    });
-
-    // UPLOAD IMAGE
-    const dataForm = new FormData();
-    const file = new File(['file user'], 'example.png', {type: 'image/png'})
-    dataForm.append('file', file)
-
-    it('Test validate upload image', () => {
-        const value = validateForms.validationImage(dataForm);
-        expect(value).toEqual({ "msg": "OK", "status": 1 });
-    });
-
-    const dataForm2 = new FormData();
-    const file_pdf = new File(['file user'], 'example.pdf', {type: 'image/png'})
-    dataForm2.append('file', file_pdf)
-
-    it('Test validate upload pdf instead of image file', () => {
-        const value = validateForms.validationImage(dataForm2);
-        expect(value).toEqual({ "msg": "File format is not an image", "status": 0 });
-    });
+    // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ii1NQ1FaU0tlTS15TnphQVNSaHJvIiwiYXZhdGFyIjoiaHR0cHM6Ly9saW5rLnRvLmltYWdlIiwiZW1haWwiOiJoYWkudHJhbkB0ZXJyYWxvZ2ljLmNvbSIsIm5hbWUiOiJIYWkgVHJhbiBUZXJyYWxvZ2ljIiwicGhvbmUiOiIxMjM0NTY3ODkiLCJkaXNwbGF5TmFtZSI6IkhhaSBUcmFuIFRlcnJhbG9naWMiLCJpYXQiOjE1OTU0MDM0ODF9.NetRY_Pu_eAxsbNuapa8Wc2MdP62r5EFQd2IDg-GGew';
+    // it('Test validate update information form', async () => {
+    //     const value = await userService.updateInformation(updateInformationUser, token);
+    //     expect(value.status).toEqual(1);
+    // });
 
 });

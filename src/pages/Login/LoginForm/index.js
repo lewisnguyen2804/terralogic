@@ -117,8 +117,6 @@ class LoginForm extends Component {
                         name="remember-pwd"
                         onChange={this.rememberPasswordOnChange}
                     />
-
-
                 </form>
             </div>
         )
@@ -136,5 +134,6 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch)
 }
 
+export { LoginForm };
 const LoginFormContainer = connect(mapStateToProps, mapDispatchToProps)(LoginForm);
 export default LoginFormContainer;

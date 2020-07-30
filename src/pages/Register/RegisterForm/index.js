@@ -170,7 +170,6 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch)
 }
 
-
-const RegisterFormContainer = connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
-
-export default withRouter(RegisterFormContainer);
+export { RegisterForm };
+const RegisterFormContainer = connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterForm));
+export default RegisterFormContainer;
