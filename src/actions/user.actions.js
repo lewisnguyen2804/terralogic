@@ -103,17 +103,29 @@ let register = (userRegister) => {
 }
 
 let uploadImage = (formData, token) => {
+    let request = () => {
+        return {
+            type: userConstants.UPLOAD_REQUEST
+        }
+    }
     let success = (link) => {
         return {
-            type: userConstants.IMAGE_UPLOADED,
+            type: userConstants.UPLOAD_SUCCESS,
             link
         }
     }
+    let failure = () => {
+        return {
+            type: userConstants.UPLOAD_FAILURE
+        }
+    }
     return dispatch => {
+        dispatch(request())
         userService.uploadImage(formData, token)
         .then(
             value => {
                 if (value.status === 0) {
+                    dispatch(failure())
                     dispatch(alertActions.error(value.msg));
                 }
                 else if (value.status === 1) {

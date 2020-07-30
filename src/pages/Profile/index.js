@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { userActions } from '../../actions';
 
 import API from '../../services/config';
+import LoadingScreen from '../../components/LoadingScreen';
 
 class Profile extends Component {
     constructor(props) {
@@ -203,6 +204,12 @@ class Profile extends Component {
                             onChange={this.onFileChange}
                             style={{ display: "none" }} />
 
+                        {
+                            this.props.uploading &&
+                            <LoadingScreen />
+                        }
+
+
                         <div className="contact-information">
                             <div className="row">
                                 <div className="col-sm-6">
@@ -320,9 +327,9 @@ class Profile extends Component {
 }
 
 let mapStateToProps = (state) => {
-    const { link } = state.uploadImage;
+    const { link, uploading } = state.uploadImage;
     const { updating } = state.update;
-    return { link, updating };
+    return { link, updating, uploading };
 }
 
 let mapDispatchToProps = (dispatch) => {
