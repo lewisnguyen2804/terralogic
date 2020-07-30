@@ -9,3 +9,14 @@ describe('test for Register Page', () => {
     });
 });
 
+describe('test for Register Page', () => {
+    const wrapper = shallow(<RegisterForm />);
+    const instance = wrapper.instance();
+    const registerClick = jest.spyOn(instance, 'handleSubmit');
+    wrapper.update();
+    instance.forceUpdate();
+    it('it should render with check func', () => {
+        wrapper.find('form').simulate('submit', { preventDefault () {} });
+        expect(registerClick).toHaveBeenCalled();
+    });
+});

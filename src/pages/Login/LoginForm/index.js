@@ -46,7 +46,11 @@ class LoginForm extends Component {
     handleSubmit = async (event) => {
         event.preventDefault();
         // START TO LOGIN
-        this.props.login(this.state.user);
+        try {
+            this.props.login(this.state.user);
+        } catch (e) {
+            //
+        }
     }
 
     // SHOW/HIDE PASSWORD

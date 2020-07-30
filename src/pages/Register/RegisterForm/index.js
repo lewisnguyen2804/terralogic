@@ -46,7 +46,11 @@ class RegisterForm extends Component {
     handleSubmit = async (event) => {
         event.preventDefault();
         // START TO REGISTER
-        this.props.register(this.state.user);
+        try {
+            this.props.register(this.state.user);
+        } catch (e) {
+            //
+        }
     }
 
     // SHOW/HIDE PASSWORD
