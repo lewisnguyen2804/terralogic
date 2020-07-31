@@ -12,12 +12,11 @@
 
 // pages
 @import '../pages/Login/_style.scss';
-@import '../pages/Login/LoginForm/_style.scss';
-
 @import '../pages/Register/_style.scss';
-@import '../pages/Register/RegisterForm/_style.scss';
-
 @import '../pages/Profile/_style.scss';
 @import '../pages/Profile/UserCard/_style.scss';
 @import '../pages/Register/style.scss';
 
+// containers
+@import '../containers/LoginForm/_style.scss';
+@import '../containers/RegisterForm/_style.scss';

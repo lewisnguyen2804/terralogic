@@ -2,17 +2,17 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 
-import EmailIcon from '../../../assets/images/Suche.svg'
-import PasswordIcon from '../../../assets/images/Suche02.svg'
-import ShowPasswordIcon from '../../../assets/images/Suche03.svg'
+import EmailIcon from '../../assets/images/Suche.svg'
+import PasswordIcon from '../../assets/images/Suche02.svg'
+import ShowPasswordIcon from '../../assets/images/Suche03.svg'
 
-import CustomButton from '../../../components/CustomButton'
-import RoundedInput from '../../../components/RoundedInput'
-
-import { withRouter } from 'react-router-dom';
+import CustomButton from '../../components/CustomButton'
+import RoundedInput from '../../components/RoundedInput'
 
 import { connect } from 'react-redux';
-import { userActions } from '../../../actions';
+import { userActions } from '../../actions';
+
+import { withRouter } from 'react-router-dom';
 
 class RegisterForm extends Component {
     constructor(props) {

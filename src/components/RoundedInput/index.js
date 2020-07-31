@@ -15,7 +15,12 @@ export default class RoundedInput extends Component {
                         name={this.props.name}
                         onChange={this.props.handleChange}
                     />
-                    {this.props.isPassword === 'true' ? <img className={this.props.showPwdClassName} alt="pwd-icon" onClick={this.props.showPwdOnClick} src={this.props.showPwdIcon} />:''}
+                    {this.props.isPassword === 'true' ?
+                        <img className={this.props.showPwdClassName}
+                            alt="pwd-icon"
+                            onClick={this.props.showPwdOnClick}
+                            src={this.props.showPwdIcon} />
+                        : ''}
                 </div>
             </div>
         )

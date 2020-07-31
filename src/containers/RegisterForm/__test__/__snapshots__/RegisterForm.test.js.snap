@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`test for Register Page it should render with check func 1`] = `ReactWrapper {}`;
+
 exports[`test for Register Page should render correctly 1`] = `"{}"`;

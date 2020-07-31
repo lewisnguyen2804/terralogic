@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CompanyLogo from '../../components/CompanyLogo'
 import CompanyImage from '../../components/CompanyImage'
-import RegisterFormContainer from './RegisterForm'
+import RegisterFormContainer from '../../containers/RegisterForm'
 
 export default class Register extends Component {
     render() {
