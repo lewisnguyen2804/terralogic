@@ -337,6 +337,6 @@ let mapDispatchToProps = (dispatch) => {
         changePassword: userActions.changePassword,
     }, dispatch)
 }
-
+export { ProfileForm };
 const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileForm);
 export default ProfileContainer;
