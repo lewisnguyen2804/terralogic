@@ -33,14 +33,16 @@ describe('Test Services', () => {
     });
 
     // LOGIN FORM
-    const loginUser = {
+    let loginUser = {
         email: 'ngoctuanitpy@gmail.com',
         password: 'Abc123!!!'
     }
+
     it('Test validate login form', () => {
-        const value = validateForms.validationLogin(loginUser);
-        expect(value).toEqual({ "msg": "OK", "status": 1 });
+        let value = validateForms.validationLogin(loginUser);
+        expect(value.status).toEqual(1);
     });
+
 
     // REGISTER FORM
     const registerUser = {
@@ -81,7 +83,7 @@ describe('Test Services', () => {
 
     // UPLOAD IMAGE
     const dataForm = new FormData();
-    const file = new File(['file user'], 'example.png', {type: 'image/png'})
+    const file = new File(['file user'], 'example.png', { type: 'image/png' })
     dataForm.append('file', file)
 
     it('Test validate upload image', () => {
@@ -90,7 +92,7 @@ describe('Test Services', () => {
     });
 
     const dataForm2 = new FormData();
-    const file_pdf = new File(['file user'], 'example.pdf', {type: 'image/png'})
+    const file_pdf = new File(['file user'], 'example.pdf', { type: 'image/png' })
     dataForm2.append('file', file_pdf)
 
     it('Test validate upload pdf instead of image file', () => {

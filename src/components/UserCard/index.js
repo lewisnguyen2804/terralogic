@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ChangeUserImage from '../../../assets/images/edit_photo.svg';
+import ChangeUserImage from '../../assets/images/edit_photo.svg';
 
 export default class UserCard extends Component {
     render() {

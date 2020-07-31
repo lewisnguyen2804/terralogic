@@ -79,6 +79,6 @@ describe('test for Register Page', () => {
         const inputTest = Enzyme.mount(<CustomButton onClick={goBackClick} />);
         expect(inputTest).toMatchSnapshot();
         inputTest.find('input').simulate('click');
-        expect(inputTest).toHaveBeenCalled();
+        expect(goBackClick).toHaveBeenCalled();
     });
 });
