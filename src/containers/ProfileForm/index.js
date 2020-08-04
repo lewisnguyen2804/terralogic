@@ -101,9 +101,14 @@ class ProfileForm extends Component {
         }
         if (this.state.isChangingPassword === true) {
             this.changePassword();
-            this.setState({
-                isChangingPassword: false,
-            })
+            setTimeout(() => {
+                this.setState({
+                    isChangingPassword: false,
+                    currentPwd: '',
+                    newPwd: '',
+                    confirmPwd: ''
+                });
+            }, 1000);
         }
     }
 
@@ -182,6 +187,7 @@ class ProfileForm extends Component {
         const confirmPasswordType = this.state.showConfirmPwd ? "text" : "password";
 
         const isChangingInformation = (this.state.isChangingPassword || this.state.isUpdatingInformation) ? "button-type-1 button-enable" : "button-type-1 button-disable";
+        
         // user image
         let userImage = (this.props.link !== undefined) ? `${API.webUrl}${this.props.link}` : `${API.webUrl}${this.state.userImage}`;
         // default user image

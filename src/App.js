@@ -14,13 +14,22 @@ import { connect } from 'react-redux';
 import { alertActions } from './actions';
 import { bindActionCreators } from 'redux';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class App extends Component {
 	render() {
 		const { alert } = this.props;
-		const alertType = alert.type === 'alert-success' ? 'bg-success' : 'bg-danger';
+		const toastOptions = {
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: true,
+		}
+		// const alertType = alert.type === 'alert-success' ? 'bg-success' : 'bg-danger';
+		const toastType = alert.type === 'alert-success' ? toast.success(alert.message, toastOptions) : toast.error(alert.message, toastOptions);
 		return (
 			<div>
-				{alert.message &&
+				{/* {alert.message &&
 					<div className={`alert-in-app text-center fade show text-white p-2 fixed-top ${alertType}`}>
 						{alert.message}
 						<div className="alert-dissmiss-btn">
@@ -31,7 +40,11 @@ class App extends Component {
 								data-dismiss="alert">&times;</button>
 						</div>
 					</div>
-				}
+				} */}
+
+				{alert.message
+					&& toastType
+					&& <ToastContainer />}
 
 				<Router history={history}>
 					<Switch>

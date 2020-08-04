@@ -75,7 +75,7 @@ class RegisterForm extends Component {
         let confirmPasswordType = this.state.showConfirmPassword ? "text" : "password";
 
         return (
-            <div className="login-form">
+            <div className="register-form">
                 <h2 className="form-title">Register Your Account</h2>
 
                 <form className="form-main" onSubmit={this.handleSubmit}>

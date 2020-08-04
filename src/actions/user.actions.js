@@ -95,6 +95,7 @@ let register = (userRegister) => {
                     else if (user.status === 1) {
                         dispatch(success(user));
                         dispatch(alertActions.success(user.msg));
+                        // push and autofill Login Form after registering
                         history.push({ pathname: '/login', user: userRegister });
                     }
                 }
