@@ -45,9 +45,11 @@ class RegisterForm extends Component {
     // SUBMIT FORM
     handleSubmit = async (event) => {
         event.preventDefault();
+        const { register = {} } = this.props;
+
         // START TO REGISTER
         try {
-            this.props.register(this.state.user);
+            register(this.state.user);
         } catch (e) {
             //
         }
@@ -64,7 +66,8 @@ class RegisterForm extends Component {
 
     // GO BACK BUTTON
     goBack = () => {
-        this.props.history.goBack()
+        const { history = {} } = this.props;
+        history.goBack()
     }
 
     render() {

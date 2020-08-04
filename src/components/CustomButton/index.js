@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 
 export default class CustomButton extends Component {
     render() {
+        const { 
+            type = 'button', 
+            className = '', 
+            onClick = {}, 
+            value = "Button" 
+        } = this.props;
         return (
             <input
-                type={this.props.type}
-                className={this.props.className}
-                onClick={this.props.onClick}
-                value={this.props.value} />
+                type={type}
+                className={className}
+                onClick={onClick}
+                value={value} />
         )
     }
 }

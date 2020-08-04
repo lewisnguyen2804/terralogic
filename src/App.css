@@ -22,21 +22,3 @@ body {
 	font-family: "Proxima Thin";
 	src: local("Proxima Thin"), url(./fonts/Proxima\ Nova\ Thin.otf) format("woff");
 }
-
-/* ALERT */
-.alert-in-app {
-	position: relative;
-}
-
-.alert-dissmiss-btn {
-	position: absolute;
-	right: 0;
-	margin-right: 20px;
-	border: none;
-	color: white;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-}
-

@@ -60,9 +60,11 @@ class LoginForm extends Component {
     // SUBMIT FORM
     handleSubmit = async (event) => {
         event.preventDefault();
+        const { login = {} } = this.props;
+
         // START TO LOGIN
         try {
-            this.props.login(this.state.user);
+            login(this.state.user);
         } catch (e) {
             //
         }

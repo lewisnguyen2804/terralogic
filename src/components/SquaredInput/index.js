@@ -2,20 +2,32 @@ import React, { Component } from 'react'
 
 export default class SquaredInput extends Component {
     render() {
+        const {
+            title = 'Input Title',
+            type = 'text',
+            value = '',
+            name = 'defaultName',
+            handleChange = {},
+            isPassword = 'false',
+            imgClassName = '',
+            onShowPasswordClick = {},
+            imgAlt = 'show-password-icon',
+            imgSrc = ''
+        } = this.props;
         return (
             <div className="input-group">
-                <label>{this.props.title}</label>
+                <label>{title}</label>
                 <input
-                    type={this.props.type}
-                    value={this.props.value}
-                    onChange={this.props.handleChange}
-                    name={this.props.name} />
-                {this.props.isPassword === "true" ?
+                    type={type}
+                    value={value}
+                    onChange={handleChange}
+                    name={name} />
+                {isPassword === "true" ?
                     <img
-                        src={this.props.imgSrc}
-                        className={this.props.imgClassName}
-                        alt={this.props.imgAlt}
-                        onClick={this.props.onShowPasswordClick} />
+                        src={imgSrc}
+                        className={imgClassName}
+                        alt={imgAlt}
+                        onClick={onShowPasswordClick} />
                     : ''}
             </div>
         )

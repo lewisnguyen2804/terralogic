@@ -2,24 +2,37 @@ import React, { Component } from 'react'
 
 export default class RoundedInput extends Component {
     render() {
+        const {
+            title = 'Input Title',
+            icon = '',
+            type = 'text',
+            value = '',
+            placeholder = 'placeholder',
+            name = 'defaultName',
+            handleChange = {},
+            isPassword = 'false',
+            showPwdClassName = '',
+            showPwdOnClick = {},
+            showPwdIcon = ''
+        } = this.props;
         return (
             <div className="input-container">
-                <p className="input-title">{this.props.title}</p>
+                <p className="input-title">{title}</p>
                 <div className="input-with-icon">
-                    <img className="input-icon" alt="input-icon" src={this.props.icon} />
+                    <img className="input-icon" alt="input-icon" src={icon} />
                     <input
                         className="input-text"
-                        type={this.props.type}
-                        value={this.props.value}
-                        placeholder={this.props.placeholder}
-                        name={this.props.name}
-                        onChange={this.props.handleChange}
+                        type={type}
+                        value={value}
+                        placeholder={placeholder}
+                        name={name}
+                        onChange={handleChange}
                     />
-                    {this.props.isPassword === 'true' ?
-                        <img className={this.props.showPwdClassName}
+                    {isPassword === 'true' ?
+                        <img className={showPwdClassName}
                             alt="pwd-icon"
-                            onClick={this.props.showPwdOnClick}
-                            src={this.props.showPwdIcon} />
+                            onClick={showPwdOnClick}
+                            src={showPwdIcon} />
                         : ''}
                 </div>
             </div>

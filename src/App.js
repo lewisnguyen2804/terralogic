@@ -23,7 +23,7 @@ class App extends Component {
 	render() {
 		const { alert } = this.props;
 		const toastOptions = {
-			position: "top-left",
+			position: "top-right",
 			autoClose: 5000,
 			hideProgressBar: true,
 			closeOnClick: true,

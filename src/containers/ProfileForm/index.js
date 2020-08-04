@@ -154,7 +154,8 @@ class ProfileForm extends Component {
 
     // LOGOUT
     onLogOutClick = () => {
-        this.props.logout();
+        const { logout = {} } = this.props;
+        logout();
     }
 
     render() {
