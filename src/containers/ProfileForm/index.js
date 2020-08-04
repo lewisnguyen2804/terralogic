@@ -120,6 +120,14 @@ class ProfileForm extends Component {
         }
         if (data.currentPassword !== '' || data.newPassword !== '' || data.confirmPassword !== '') {
             this.props.changePassword(data, this.state.user.token);
+            // clear password inputs
+            setTimeout(() => {
+                this.setState({
+                    currentPwd: '',
+                    newPwd: '',
+                    confirmPwd: ''
+                })
+            }, 2000);
         }
     }
 
@@ -153,6 +161,9 @@ class ProfileForm extends Component {
         const currentPasswordType = this.state.showCurrentPwd ? "text" : "password";
         const newPasswordType = this.state.showNewPwd ? "text" : "password";
         const confirmPasswordType = this.state.showConfirmPwd ? "text" : "password";
+        const showPasswordIcon = this.state.showCurrentPwd ? "show-pwd-icon" : "hide-pwd-icon";
+        const showNewPasswordIcon = this.state.showNewPwd ? "show-pwd-icon" : "hide-pwd-icon";
+        const showConfirmPasswordIcon = this.state.showConfirmPwd ? "show-pwd-icon" : "hide-pwd-icon";
 
         // user image
         let userImage = (this.props.link !== undefined) ? `${API.webUrl}${this.props.link}` : `${API.webUrl}${this.state.userImage}`;
@@ -236,7 +247,7 @@ class ProfileForm extends Component {
                                     value={this.state.currentPwd}
                                     imgSrc={ShowPasswordIcon}
                                     imgAlt="pwd-icon"
-                                    imgClassName="show-hide-pwd-icon"
+                                    imgClassName={showPasswordIcon}
                                     onShowPasswordClick={this.onShowCurrentPasswordClick}
                                     handleChange={this.handleChange}
                                 />
@@ -253,7 +264,7 @@ class ProfileForm extends Component {
                                     value={this.state.newPwd}
                                     imgSrc={ShowPasswordIcon}
                                     imgAlt="pwd-icon"
-                                    imgClassName="show-hide-pwd-icon"
+                                    imgClassName={showNewPasswordIcon}
                                     onShowPasswordClick={this.onShowNewPasswordClick}
                                     handleChange={this.handleChange}
                                 />
@@ -267,7 +278,7 @@ class ProfileForm extends Component {
                                     value={this.state.confirmPwd}
                                     imgSrc={ShowPasswordIcon}
                                     imgAlt="pwd-icon"
-                                    imgClassName="show-hide-pwd-icon"
+                                    imgClassName={showConfirmPasswordIcon}
                                     onShowPasswordClick={this.onShowConfirmPasswordClick}
                                     handleChange={this.handleChange}
                                 />

@@ -34,9 +34,11 @@
         right: 12px;
         top: 13px;
         cursor: pointer;
+        // change color
+        filter: invert(1)
      }
     .hide-password-icon {
         @extend .show-password-icon;
-        // change color
+        filter: invert(0)
     }
 }

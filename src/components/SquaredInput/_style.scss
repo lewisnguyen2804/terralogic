@@ -32,5 +32,14 @@
     cursor: pointer;
     height: 20px;
     opacity: 0.8;
+}
+
+.show-pwd-icon {
+    @extend .show-hide-pwd-icon;
+    filter: invert(1);
+}
+
+.hide-pwd-icon {
+    @extend .show-hide-pwd-icon;
     filter: invert(42%) sepia(99%) saturate(7489%) hue-rotate(284deg) brightness(94%) contrast(109%);
 }
