@@ -36,6 +36,7 @@ let logout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('userLogged');
     sessionStorage.removeItem('user');
+    return true
 }
 
 // REGISTER
@@ -104,7 +105,7 @@ let uploadImage = async (formData, token) => {
 
             return data
         } catch (e) {
-            console.log("error: " + e);
+            // console.log("error: " + e);
         }
     }
     else return validateForms.validationImage(formData)
@@ -129,7 +130,7 @@ let updateInformation = async (data, token) => {
             console.log("update information: ", data)
             return data
         } catch (e) {
-            console.log("error: " + e);
+            // console.log("error: " + e);
         }
     }
     else {
@@ -161,7 +162,7 @@ let changePassword = async (data, token) => {
             let data = await fetchResponse.json();
             return data
         } catch (e) {
-            console.log("error: " + e);
+            // console.log("error: " + e);
         }
     }
     else {

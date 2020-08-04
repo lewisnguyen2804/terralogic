@@ -135,7 +135,7 @@ let validationImage = (formData) => {
         fileName = pair[1].name
     }
 
-    const regexp = /[^/]+(jpg|png|jpeg|gif)$/;
+    const regexp = /[^/]+(jpg|png|jpeg|gif|JPG|PNG|JPEG|GIF)$/;
     const checkingResult = fileName.match(regexp);
     if (checkingResult === null) {
         msg = "File format is not an image"

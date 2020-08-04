@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import PrivateRoute from '..';
 
 describe('Test PrivateRoute', () => {
-    it('Test what?', () => {
+    it('Test PrivateRoute', () => {
         const privateRoute = shallow(<PrivateRoute />);
         expect(privateRoute).toMatchSnapshot()
     });
