@@ -9,10 +9,10 @@ export default class RoundedInput extends Component {
             value = '',
             placeholder = 'placeholder',
             name = 'defaultName',
-            handleChange = {},
+            handleChange = () => {},
             isPassword = 'false',
             showPwdClassName = '',
-            showPwdOnClick = {},
+            showPwdOnClick = () => {},
             showPwdIcon = ''
         } = this.props;
         return (

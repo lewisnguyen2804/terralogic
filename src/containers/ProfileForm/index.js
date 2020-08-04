@@ -35,6 +35,15 @@ class ProfileForm extends Component {
 
     }
 
+    // BEFORE CLOSE WINDOWS (NO REMEMBER USER)
+    setupBeforeUnloadListener = () => {
+        window.addEventListener("beforeunload", (e) => {
+            e.preventDefault();
+            localStorage.removeItem('user');
+            localStorage.removeItem('userLogged');
+        });
+    };
+
     componentDidMount = () => {
         // user decoded
         let userLogged = localStorage.getItem('userLogged');
@@ -54,6 +63,12 @@ class ProfileForm extends Component {
             })
         } catch (e) {
             console.log("error get profile: " + e);
+        }
+
+        // remember user login?
+        const rememberStatus = localStorage.getItem('rememberUser');
+        if (rememberStatus === 'false') {
+            this.setupBeforeUnloadListener();
         }
     }
 
@@ -156,6 +171,7 @@ class ProfileForm extends Component {
     onLogOutClick = () => {
         const { logout = {} } = this.props;
         logout();
+        localStorage.setItem('rememberUser', false)
     }
 
     render() {

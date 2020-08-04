@@ -41,6 +41,7 @@ class LoginForm extends Component {
         } catch {
             // error
         }
+        localStorage.setItem('rememberUser', this.state.rememberPassword)
     }
 
     // HANDLE INPUTS
@@ -77,7 +78,11 @@ class LoginForm extends Component {
 
     // REMEMBER PASSWORD
     rememberPasswordOnChange = () => {
-        this.setState({ rememberPassword: !this.state.rememberPassword })
+        let rememberPassword = !this.state.rememberPassword;
+        this.setState({ 
+            rememberPassword
+        })
+        localStorage.setItem('rememberUser', rememberPassword)
     }
 
     render() {

@@ -7,10 +7,10 @@ export default class SquaredInput extends Component {
             type = 'text',
             value = '',
             name = 'defaultName',
-            handleChange = {},
+            handleChange = () => {},
             isPassword = 'false',
             imgClassName = '',
-            onShowPasswordClick = {},
+            onShowPasswordClick = () => {},
             imgAlt = 'show-password-icon',
             imgSrc = ''
         } = this.props;

@@ -4,7 +4,7 @@ export default class CustomCheckBox extends Component {
     render() {
         const {
             name = 'checkbox',
-            onChange = {},
+            onChange = () => {},
             label = "Checkbox Label" 
         } = this.props;
         return (

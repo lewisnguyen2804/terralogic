@@ -5,7 +5,7 @@ export default class CustomButton extends Component {
         const { 
             type = 'button', 
             className = '', 
-            onClick = {}, 
+            onClick = () => {}, 
             value = "Button" 
         } = this.props;
         return (

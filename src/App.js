@@ -18,7 +18,6 @@ import { bindActionCreators } from 'redux';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 class App extends Component {
 	render() {
 		const { alert } = this.props;
