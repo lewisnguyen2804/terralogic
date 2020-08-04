@@ -1,19 +1,20 @@
-/*eslint-disable */
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 
-import EmailIcon from '../../assets/images/Suche.svg'
-import PasswordIcon from '../../assets/images/Suche02.svg'
-import ShowPasswordIcon from '../../assets/images/Suche03.svg'
+import EmailIcon from '../../assets/images/Suche.svg';
+import PasswordIcon from '../../assets/images/Suche02.svg';
+import ShowPasswordIcon from '../../assets/images/Suche03.svg';
 
-import CustomButton from '../../components/CustomButton'
-import RoundedInput from '../../components/RoundedInput'
-import CustomCheckBox from '../../components/CustomCheckBox'
+import CustomButton from '../../components/CustomButton';
+import RoundedInput from '../../components/RoundedInput';
+import CustomCheckBox from '../../components/CustomCheckBox';
 
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { userActions } from '../../actions';
+import { history } from '../../helpers/history';
+
 class LoginForm extends Component {
     constructor(props) {
         super(props);
@@ -24,6 +25,21 @@ class LoginForm extends Component {
             },
             showPassword: false,
             rememberPassword: false
+        }
+    }
+
+    componentDidMount = () => {
+        try {
+            const registerValues = history.location.user;
+            console.log("registered user: ", registerValues)
+            this.setState({
+                user: {
+                    email: registerValues.email,
+                    password: registerValues.password
+                }
+            })
+        } catch {
+            // error
         }
     }
 

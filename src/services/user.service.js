@@ -72,6 +72,7 @@ let register = async (user) => {
 let getProfile = (userLoggedIn) => {
     var decoded = JWT(userLoggedIn.token);
     localStorage.setItem('userLogged', JSON.stringify(decoded));
+    console.log('token decode: ', decoded)
     return decoded
 }
 
@@ -90,7 +91,6 @@ let uploadImage = async (formData, token) => {
             let fetchResponse = await fetch(`${API.apiUrl}/upload`, options);
             let data = await fetchResponse.json();
             console.log("update picture: ", data)
-            // localStorage.setItem('userImage', JSON.stringify(data));
 
             // update avatar on user logged
             let value = JSON.parse(localStorage.getItem('userLogged'));

@@ -95,11 +95,16 @@ class ProfileForm extends Component {
     editProfile = () => {
         if (this.state.isUpdatingInformation === true) {
             this.updateInformation();
+            this.setState({
+                isUpdatingInformation: false
+            })
         }
         if (this.state.isChangingPassword === true) {
             this.changePassword();
+            this.setState({
+                isChangingPassword: false,
+            })
         }
-        this.setState({ isChangingPassword: false, isUpdatingInformation: false })
     }
 
     // UPDATE INFORMATION
@@ -109,8 +114,8 @@ class ProfileForm extends Component {
             email: this.state.email,
             phone: this.state.phone
         }
-        this.props.updateInformation(data, this.state.user.token)
-        this.updateLocalStorage()
+        this.props.updateInformation(data, this.state.user.token);
+        this.updateLocalStorage();
     }
 
     // CHANGE PASSWORD
@@ -120,18 +125,15 @@ class ProfileForm extends Component {
             "newPassword": this.state.newPwd,
             "confirmPassword": this.state.confirmPwd,
         }
-        this.props.changePassword(data, this.state.user.token)
+        this.props.changePassword(data, this.state.user.token);
     }
 
 
     // HANDLE INPUTS
     handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value,
-        });
         let isUpdatingInformation = false;
         let isChangingPassword = false;
-
+        
         // CHECK IF USER IS UPDATING PROFILE
         if ((this.state.fullName !== this.state.userLogged.name)
             || (this.state.email !== this.state.userLogged.email)
@@ -150,7 +152,10 @@ class ProfileForm extends Component {
             isChangingPassword = false
         }
 
-        this.setState({ isChangingPassword, isUpdatingInformation })
+        this.setState({ 
+            isChangingPassword: isChangingPassword, 
+            isUpdatingInformation: isUpdatingInformation, 
+            [event.target.name]: event.target.value, });
     };
 
     // SHOW/HIDE PASSWORD
@@ -178,8 +183,11 @@ class ProfileForm extends Component {
 
         const isChangingInformation = (this.state.isChangingPassword || this.state.isUpdatingInformation) ? "button-type-1 button-enable" : "button-type-1 button-disable";
         // user image
-        const userImage = (this.props.link !== undefined) ? `${API.webUrl}${this.props.link}` : `${API.webUrl}${this.state.userImage}`;
-
+        let userImage = (this.props.link !== undefined) ? `${API.webUrl}${this.props.link}` : `${API.webUrl}${this.state.userImage}`;
+        // default user image
+        if (userImage === `${API.webUrl}undefined`) {
+            userImage = `${API.webUrl}-MDo7lIKOI7gn0-DNdNr_1596502631300_users-vector-icon-png_260862.jpg`
+        }
         return (
             <div>
                 <div className="header">

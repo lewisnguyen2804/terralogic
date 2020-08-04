@@ -43,7 +43,7 @@ let login = (userLogin) => {
 
                         // get information of logged user - jwt decode
                         dispatch(successLoggedUser(userService.getProfile(user)));
-                        
+
                         dispatch(alertActions.clear())
                         history.push('/');
                     }
@@ -95,7 +95,7 @@ let register = (userRegister) => {
                     else if (user.status === 1) {
                         dispatch(success(user));
                         dispatch(alertActions.success(user.msg));
-                        // history.push('/login');
+                        history.push({ pathname: '/login', user: userRegister });
                     }
                 }
             );
@@ -122,19 +122,19 @@ let uploadImage = (formData, token) => {
     return dispatch => {
         dispatch(request())
         userService.uploadImage(formData, token)
-        .then(
-            value => {
-                if (value.status === 0) {
-                    dispatch(failure())
-                    dispatch(alertActions.error(value.msg));
+            .then(
+                value => {
+                    if (value.status === 0) {
+                        dispatch(failure())
+                        dispatch(alertActions.error(value.msg));
+                    }
+                    else if (value.status === 1) {
+                        dispatch(alertActions.success(value.msg));
+                        // return link
+                        dispatch(success(value.data));
+                    }
                 }
-                else if (value.status === 1) {
-                    dispatch(alertActions.success(value.msg));
-                    // return link
-                    dispatch(success(value.data));
-                }
-            }
-        )
+            )
     }
 }
 
@@ -157,18 +157,18 @@ let updateInformation = (data, token) => {
     return dispatch => {
         dispatch(request())
         userService.updateInformation(data, token)
-        .then(
-            value => {
-                if (value.status === 0) {
-                    dispatch(failure())
-                    dispatch(alertActions.error(value.msg));
+            .then(
+                value => {
+                    if (value.status === 0) {
+                        dispatch(failure())
+                        dispatch(alertActions.error(value.msg));
+                    }
+                    else if (value.status === 1) {
+                        dispatch(success())
+                        dispatch(alertActions.success(value.msg));
+                    }
                 }
-                else if (value.status === 1) {
-                    dispatch(success())
-                    dispatch(alertActions.success(value.msg));
-                }
-            }
-        )
+            )
     }
 }
 
@@ -191,18 +191,18 @@ let changePassword = (data, token) => {
     return dispatch => {
         dispatch(request())
         userService.changePassword(data, token)
-        .then(
-            value => {
-                if (value.status === 0) {
-                    dispatch(failure())
-                    dispatch(alertActions.error(value.msg));
+            .then(
+                value => {
+                    if (value.status === 0) {
+                        dispatch(failure())
+                        dispatch(alertActions.error(value.msg));
+                    }
+                    else if (value.status === 1) {
+                        dispatch(success())
+                        dispatch(alertActions.success(value.msg));
+                    }
                 }
-                else if (value.status === 1) {
-                    dispatch(success())
-                    dispatch(alertActions.success(value.msg));
-                }
-            }
-        )
+            )
     }
 }
 

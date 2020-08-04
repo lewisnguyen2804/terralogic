@@ -3,7 +3,7 @@ import './App.css';
 import './styles/style.scss';
 
 import Login from './pages/Login';
-import { Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route, Redirect } from "react-router-dom";
 
 import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
@@ -34,17 +34,17 @@ class App extends Component {
 				}
 
 				<Router history={history}>
-					<div>
-						<Switch>
-							<PrivateRoute exact path="/" component={ProfileContainer} />
-							<Route path="/login">
-								<Login />
-							</Route>
-							<Route path="/register">
-								<Register />
-							</Route>
-						</Switch>
-					</div>
+					<Switch>
+						<PrivateRoute exact path="/" component={ProfileContainer} />
+						<Route path="/login">
+							<Login />
+						</Route>
+						<Route path="/register">
+							<Register />
+						</Route>
+						{/* 404 */}
+						<Redirect from='*' to='/' />
+					</Switch>
 				</Router>
 			</div>
 		);

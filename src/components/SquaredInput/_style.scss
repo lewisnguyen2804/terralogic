@@ -18,9 +18,6 @@
         border-radius: 4px;
         width: 100%;
         @extend .bold-font;
-        &:focus {
-            border: 1px solid $third-color;
-        }
     }
 }
 
