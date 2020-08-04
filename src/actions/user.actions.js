@@ -30,7 +30,7 @@ let login = (userLogin) => {
     }
     return dispatch => {
         dispatch(request(userLogin));
-        dispatch(alertActions.clear())
+        // dispatch(alertActions.clear())
         userService.login(userLogin)
             .then(
                 user => {
@@ -44,7 +44,7 @@ let login = (userLogin) => {
                         // get information of logged user - jwt decode
                         dispatch(successLoggedUser(userService.getProfile(user)));
 
-                        dispatch(alertActions.clear())
+                        // dispatch(alertActions.clear())
                         history.push('/');
                     }
                 }
@@ -55,7 +55,7 @@ let login = (userLogin) => {
 let logout = () => {
     userService.logout();
     return dispatch => {
-        dispatch(alertActions.clear())
+        // dispatch(alertActions.clear())
         history.push('/');
         return {
             type: userConstants.LOGOUT
@@ -84,7 +84,7 @@ let register = (userRegister) => {
     }
     return dispatch => {
         dispatch(request(userRegister));
-        dispatch(alertActions.clear())
+        // dispatch(alertActions.clear())
         userService.register(userRegister)
             .then(
                 user => {

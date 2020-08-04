@@ -14,36 +14,26 @@ import { connect } from 'react-redux';
 import { alertActions } from './actions';
 import { bindActionCreators } from 'redux';
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
 	render() {
 		const { alert } = this.props;
 		const toastOptions = {
+			position: "bottom-right",
+			autoClose: 5000,
 			hideProgressBar: true,
 			closeOnClick: true,
 			pauseOnHover: true,
+			transition: Zoom,
 		}
-		// const alertType = alert.type === 'alert-success' ? 'bg-success' : 'bg-danger';
-		const toastType = alert.type === 'alert-success' ? toast.success(alert.message, toastOptions) : toast.error(alert.message, toastOptions);
+		const toastContainer = alert.type === 'alert-success' ? toast.success(alert.message, toastOptions) : toast.error(alert.message, toastOptions);
 		return (
 			<div>
-				{/* {alert.message &&
-					<div className={`alert-in-app text-center fade show text-white p-2 fixed-top ${alertType}`}>
-						{alert.message}
-						<div className="alert-dissmiss-btn">
-							<button
-								type="button"
-								onClick={() => { this.props.alertClear() }}
-								className="close"
-								data-dismiss="alert">&times;</button>
-						</div>
-					</div>
-				} */}
-
+				{/* ALERT */}
 				{alert.message
-					&& toastType
+					&& toastContainer
 					&& <ToastContainer />}
 
 				<Router history={history}>
