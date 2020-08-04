@@ -1,5 +1,7 @@
 import { userService } from '../user.service';
 
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ii1NQ1FaU0tlTS15TnphQVNSaHJvIiwiYXZhdGFyIjoiaHR0cHM6Ly9saW5rLnRvLmltYWdlIiwiZW1haWwiOiJoYWkudHJhbkB0ZXJyYWxvZ2ljLmNvbSIsIm5hbWUiOiJIYWkgVHJhbiBUZXJyYWxvZ2ljIiwicGhvbmUiOiIxMjM0NTY3ODkiLCJkaXNwbGF5TmFtZSI6IkhhaSBUcmFuIFRlcnJhbG9naWMiLCJpYXQiOjE1OTU0MDM0ODF9.NetRY_Pu_eAxsbNuapa8Wc2MdP62r5EFQd2IDg-GGew';
+
 describe('Test Services', () => {
     // GET PROFILE
     // const userLoggedIn = {
@@ -68,21 +70,33 @@ describe('Test Services', () => {
         myAvatar: 'nothing here'
     }
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ii1NQ1FaU0tlTS15TnphQVNSaHJvIiwiYXZhdGFyIjoiaHR0cHM6Ly9saW5rLnRvLmltYWdlIiwiZW1haWwiOiJoYWkudHJhbkB0ZXJyYWxvZ2ljLmNvbSIsIm5hbWUiOiJIYWkgVHJhbiBUZXJyYWxvZ2ljIiwicGhvbmUiOiIxMjM0NTY3ODkiLCJkaXNwbGF5TmFtZSI6IkhhaSBUcmFuIFRlcnJhbG9naWMiLCJpYXQiOjE1OTU0MDM0ODF9.NetRY_Pu_eAxsbNuapa8Wc2MdP62r5EFQd2IDg-GGew';
     it('Test validate update information form', async () => {
         const value = await userService.updateInformation(updateInformationUser, token);
         expect(value.status).toEqual(1);
     });
 
+    const updateInformationUserError = {
+        email: 'hahahahahgmail.com',
+        name: 'Test',
+        phone: '0392938232',
+        myAvatar: 'nothing here'
+    }
+
+    it('Test validate update information form with error', async () => {
+        const value = await userService.updateInformation(updateInformationUserError, token);
+        expect(value.status).toEqual(0);
+    });
+
     // CHANGE PASSWORD
-    const changePasswordUser = {
+    const changePasswordUserError = {
         newPassword: 'test',
         currentPassword: 'test1111',
         confirmPassword: 'test',
     }
-
-    it('Test validate update information form', async () => {
-        const value = await userService.changePassword(changePasswordUser, token);
+    it('Test update password with error', async () => {
+        const value = await userService.changePassword(changePasswordUserError, token);
         expect(value.status).toEqual(0);
     });
+
+
 });

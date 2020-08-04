@@ -1,0 +1,24 @@
+.notfound-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.notfound-centering {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    .notfound-title {
+        color: $main-color;
+        @extend .bold-font;
+        text-align: center;
+    }
+    .notfound-return-button {
+        // text-align: center;
+        padding: 10px 70px;
+    }
+}
+

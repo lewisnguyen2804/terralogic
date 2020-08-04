@@ -16,21 +16,21 @@ const props = {
     logout: jest.fn()
 }
 
-describe('test for Profile Form Page', () => {
-    const wrapper = shallow(<ProfileForm {...props} />);
-    const instance = wrapper.instance();
-    const editProfileClick = jest.spyOn(instance, 'editProfile');
-    const onLogOutClick = jest.spyOn(instance, 'onLogOutClick');
-    wrapper.update();
-    instance.forceUpdate();
-    it('it should render with check func', () => {
-        const inputTest = wrapper.find("CustomButton")
-        inputTest.at(0).simulate('click');
-        inputTest.at(1).simulate('click');
-        expect(editProfileClick).toHaveBeenCalled();
-        expect(onLogOutClick).toHaveBeenCalled();
-    });
-});
+// describe('test for Profile Form Page', () => {
+//     const wrapper = shallow(<ProfileForm {...props} />);
+//     const instance = wrapper.instance();
+//     const editProfileClick = jest.spyOn(instance, 'editProfile');
+//     const onLogOutClick = jest.spyOn(instance, 'onLogOutClick');
+//     wrapper.update();
+//     instance.forceUpdate();
+//     it('it should render with check func', () => {
+//         const inputTest = wrapper.find("CustomButton")
+//         inputTest.at(0).simulate('click');
+//         inputTest.at(1).simulate('click');
+//         expect(editProfileClick).toHaveBeenCalled();
+//         expect(onLogOutClick).toHaveBeenCalled();
+//     });
+// });
 
 // componentDidMount
 it('it should render with check func', async () => {
