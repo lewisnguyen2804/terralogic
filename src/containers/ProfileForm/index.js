@@ -35,21 +35,21 @@ class ProfileForm extends Component {
 
     }
 
-    // BEFORE CLOSE WINDOWS (NO REMEMBER USER)
-    setupBeforeUnloadListener = () => {
-        window.addEventListener("beforeunload", (e) => {
-            e.preventDefault();
-            localStorage.removeItem('user');
-            localStorage.removeItem('userLogged');
-        });
-    };
 
     componentDidMount = () => {
-        // user decoded
+        // remember user login?
+        const rememberStatus = localStorage.getItem('rememberUser');
+
+        let user = null;
+
+        if (rememberStatus === 'false') {
+            user = sessionStorage.getItem('user');
+        } else {
+            user = localStorage.getItem('user');
+        }
+        
         let userLogged = localStorage.getItem('userLogged');
         let userLoggedObj = JSON.parse(userLogged);
-        // user with token
-        let user = localStorage.getItem('user');
         let userObj = JSON.parse(user);
 
         try {
@@ -63,12 +63,6 @@ class ProfileForm extends Component {
             })
         } catch (e) {
             console.log("error get profile: " + e);
-        }
-
-        // remember user login?
-        const rememberStatus = localStorage.getItem('rememberUser');
-        if (rememberStatus === 'false') {
-            this.setupBeforeUnloadListener();
         }
     }
 

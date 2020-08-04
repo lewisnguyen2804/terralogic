@@ -18,6 +18,7 @@ let login = async (user) => {
             let data = await fetchResponse.json();
             console.log(data); //
             localStorage.setItem('user', JSON.stringify(data));
+            sessionStorage.setItem('user', JSON.stringify(data));
             return data;
         } catch (e) {
             // SOMETHING WRONG WITH LOGIN
