@@ -21,15 +21,13 @@ class ProfileForm extends Component {
             email: '',
             phone: '',
             userImage: '',
+
             currentPwd: '',
             newPwd: '',
             confirmPwd: '',
             showCurrentPwd: false,
             showNewPwd: false,
             showConfirmPwd: false,
-
-            isUpdatingInformation: false,
-            isChangingPassword: false,
 
             user: null,
             userLogged: null
@@ -93,23 +91,8 @@ class ProfileForm extends Component {
 
     // EDIT PROFILE
     editProfile = () => {
-        if (this.state.isUpdatingInformation === true) {
-            this.updateInformation();
-            this.setState({
-                isUpdatingInformation: false
-            })
-        }
-        if (this.state.isChangingPassword === true) {
-            this.changePassword();
-            setTimeout(() => {
-                this.setState({
-                    isChangingPassword: false,
-                    currentPwd: '',
-                    newPwd: '',
-                    confirmPwd: ''
-                });
-            }, 1000);
-        }
+        this.updateInformation();
+        this.changePassword();
     }
 
     // UPDATE INFORMATION
@@ -119,8 +102,13 @@ class ProfileForm extends Component {
             email: this.state.email,
             phone: this.state.phone
         }
-        this.props.updateInformation(data, this.state.user.token);
-        this.updateLocalStorage();
+        let userLogged = localStorage.getItem('userLogged');
+        let userLoggedObj = JSON.parse(userLogged);
+
+        if (data.name !== userLoggedObj.name || data.email !== userLoggedObj.email || data.phone !== userLoggedObj.phone) {
+            this.props.updateInformation(data, this.state.user.token);
+            this.updateLocalStorage();
+        }
     }
 
     // CHANGE PASSWORD
@@ -130,37 +118,17 @@ class ProfileForm extends Component {
             "newPassword": this.state.newPwd,
             "confirmPassword": this.state.confirmPwd,
         }
-        this.props.changePassword(data, this.state.user.token);
+        if (data.currentPassword !== '' || data.newPassword !== '' || data.confirmPassword !== '') {
+            this.props.changePassword(data, this.state.user.token);
+        }
     }
 
 
     // HANDLE INPUTS
     handleChange = (event) => {
-        let isUpdatingInformation = false;
-        let isChangingPassword = false;
-        
-        // CHECK IF USER IS UPDATING PROFILE
-        if ((this.state.fullName !== this.state.userLogged.name)
-            || (this.state.email !== this.state.userLogged.email)
-            || (this.state.phone !== this.state.userLogged.phone)) {
-            isUpdatingInformation = true
-        }
-        else {
-            isUpdatingInformation = false
-        }
-        if ((this.state.currentPwd !== '')
-            || (this.state.newPwd !== '')
-            || (this.state.confirmPwd !== '')) {
-            isChangingPassword = true
-        }
-        else {
-            isChangingPassword = false
-        }
-
-        this.setState({ 
-            isChangingPassword: isChangingPassword, 
-            isUpdatingInformation: isUpdatingInformation, 
-            [event.target.name]: event.target.value, });
+        this.setState({
+            [event.target.name]: event.target.value
+        });
     };
 
     // SHOW/HIDE PASSWORD
@@ -186,8 +154,6 @@ class ProfileForm extends Component {
         const newPasswordType = this.state.showNewPwd ? "text" : "password";
         const confirmPasswordType = this.state.showConfirmPwd ? "text" : "password";
 
-        const isChangingInformation = (this.state.isChangingPassword || this.state.isUpdatingInformation) ? "button-type-1 button-enable" : "button-type-1 button-disable";
-        
         // user image
         let userImage = (this.props.link !== undefined) ? `${API.webUrl}${this.props.link}` : `${API.webUrl}${this.state.userImage}`;
         // default user image
@@ -313,14 +279,14 @@ class ProfileForm extends Component {
                         {this.props.updating &&
                             <CustomButton
                                 type="button"
-                                className={isChangingInformation}
+                                className="button-type-1 button-enable"
                                 onClick={this.editProfile}
                                 value="Saving..." />
                         }
                         {!this.props.updating &&
                             <CustomButton
                                 type="button"
-                                className={isChangingInformation}
+                                className="button-type-1 button-enable"
                                 onClick={this.editProfile}
                                 value="Save" />
                         }
